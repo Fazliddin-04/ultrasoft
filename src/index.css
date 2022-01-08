@@ -1,13 +1,146 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Toastify__toast-theme--dark {
+  background-color: #121212;
+  color: #fff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.Toastify__toast-theme--light {
+  background: var(--toastify-color-dark) !important;
+  color: var(--toastify-text-color-dark) !important;
+}
+
+.card.image-full:before {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.uigradient-1 {
+  background-image: linear-gradient(90deg, #06b6d4, #3b82f6);
+}
+
+.uigradient-2 {
+  background-image: linear-gradient(90deg, #6366f1, #0ea5e9);
+}
+
+.uigradient-3 {
+  background-image: linear-gradient(90deg, #d946ef, #8b5cf6);
+}
+
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #f000b8 transparent #f000b8 transparent;
+  border-radius: 50%;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.imagesInfo {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.formInputFile {
+  width: 100%;
+}
+.formInputFile::-webkit-file-upload-button {
+  background-color: #f000b8;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  margin-right: 1rem;
+}
+
+.swiper-container {
+  min-height: 225px;
+  height: 23vw;
+}
+
+.swiperSlideImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card figure > img {
+  max-width: 15rem !important;
+}
+
+/* 
+.view {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.835);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+.view.active {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.view__close {
+  color: white;
+  font-size: 32px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  z-index: 999;
+  right: 0;
+  top: 0;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  height: 75px;
+  outline: none;
+}
+.view__close:hover {
+  text-shadow: 0 0 15px white;
+}
+.view > img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto !important;
+  height: auto !important;
+} */
+
+.bg-white-20 {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.indicator .indicator-item.indicator-top.after-delIcon {
+    top: 40px;
 }
