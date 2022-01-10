@@ -10,6 +10,7 @@ import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import Profile from './pages/Profile'
 import Category from './pages/Category';
+import SingleCategory from './pages/SingleCategory';
 import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import EditListing from './pages/EditListing';
@@ -28,6 +29,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Explore />} />
               <Route path='/:categoryType' element={<Category />} />
+              <Route path='/:categoryType/:categoryName' element={<SingleCategory />} />
               <Route path='/:categoryType/:categoryName/:listingId' element={<Listing />} />
               <Route path='/profile' element={<PrivateRoute />}>
                 <Route path='/profile' element={<Profile />} />

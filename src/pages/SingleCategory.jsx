@@ -14,7 +14,7 @@ import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner'
 import ListingItem from '../components/ListingItem'
 
-function Category() {
+function SingleCategory() {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
   const [lastFetchedListing, setLastFetchedListing] = useState(null)
@@ -31,6 +31,7 @@ function Category() {
         const q = query(
           listingsRef,
           where('type', '==', params.categoryType),
+          where('category', '==', params.categoryName),
           orderBy('timestamp', 'desc'),
           limit(10)
         )
@@ -58,7 +59,7 @@ function Category() {
     }
 
     fetchListings()
-  }, [params.categoryType])
+  }, [params.categoryName, params.categoryType])
 
   // Pagination / Load More
   const onFetchMoreListings = async () => {
@@ -70,6 +71,7 @@ function Category() {
       const q = query(
         listingsRef,
         where('type', '==', params.categoryType),
+        where('category', '==', params.categoryName),
         orderBy('timestamp', 'desc'),
         startAfter(lastFetchedListing),
         limit(10)
@@ -101,15 +103,7 @@ function Category() {
     <div className="m-10">
       <header className="bg-base-300 p-4 rounded-xl">
         <p className="text-3xl font-bold tracking-wide">
-          {params.categoryType === 'software-apps'
-            ? 'Kompyuter ilovalar'
-            : params.categoryType === 'software-games'
-            ? "Kompyuter o'yinlar"
-            : params.categoryType === 'mobile-apps'
-            ? 'Mobil ilovalar'
-            : params.categoryType === 'mobile-games'
-            ? "Mobil o'yinlar"
-            : params.categoryType.toUpperCase().replace('-', ' ')}
+          {params.categoryName.toUpperCase().replace('-', ' ')}
         </p>
       </header>
 
@@ -140,20 +134,12 @@ function Category() {
         </>
       ) : (
         <p className="text-center mx-auto my-10 w-max">
-          {params.categoryType === 'software-apps'
-            ? 'Kompyuter ilovalar'
-            : params.categoryType === 'software-games'
-            ? "Kompyuter o'yinlar"
-            : params.categoryType === 'mobile-apps'
-            ? 'Mobil ilovalar'
-            : params.categoryType === 'mobile-games'
-            ? "Mobil o'yinlar"
-            : params.categoryType.toUpperCase().replace('-', ' ')}{' '}
-          uchun ro'yxatlar yo'q
+          {params.categoryName.toUpperCase().replace('-', ' ')} uchun ro'yxatlar
+          yo'q
         </p>
       )}
     </div>
   )
 }
 
-export default Category
+export default SingleCategory
