@@ -5,7 +5,6 @@ import { getDoc, doc } from 'firebase/firestore'
 import { getAuth } from 'firebase/auth'
 import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
-import useFileDownloader from '../hooks/useFileDownloader'
 
 import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -17,16 +16,10 @@ function Listing() {
   const [loading, setLoading] = useState(true)
   // eslint-disable-next-line
   const [shareLinkCopied, setShareLinkCopied] = useState(false)
-  const [downloadFile, downloaderComponentUI] = useFileDownloader()
-
-  // eslint-disable-next-line
-  const download = (file) => downloadFile(file)
 
   const navigate = useNavigate()
   const params = useParams()
   const auth = getAuth()
-
-  console.log(auth)
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -77,11 +70,27 @@ function Listing() {
       <div className="text-sm breadcrumbs">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Bosh sahifa</Link>
           </li>
           <li>
-            <Link to={`/category/${listing.type}`} className="capitalize">
-              {listing.type.replace('-', ' ')}
+            <Link to={`/${listing.type}`} className="capitalize">
+              {listing.type === 'software-apps'
+                ? 'Kompyuter ilovalar'
+                : listing.type === 'software-games'
+                ? "Kompyuter o'yinlar"
+                : listing.type === 'mobile-apps'
+                ? 'Mobil ilovalar'
+                : listing.type === 'mobile-games'
+                ? "Mobil o'yinlar"
+                : listing.type.toUpperCase().replace('-', ' ')}
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={`/${listing.type}/${listing.category}`}
+              className="capitalize"
+            >
+              {listing.category.replace('-', ' ')}
             </Link>
           </li>
           <li>{listing.name}</li>
@@ -115,17 +124,16 @@ function Listing() {
             className="btn btn-primary"
             download={`${listing.name}_${listing.version}.exe`}
           >
-            Download
+            Yuklab olish
           </a>
         </div>
-        {downloaderComponentUI}
       </div>
-      <div className="bg-base-300 rounded-xl py-10 my-10">
+      <div className="bg-base-300 rounded-xl py-10 my-10 listing-slide-container">
         <Swiper
           slidesPerView={1}
           navigation={true}
           pagination={{ clickable: true }}
-          className="w-5/6"
+          className="w-5/6 "
         >
           {listing.imageUrls.map((url, index) => (
             <SwiperSlide key={index}>
@@ -141,20 +149,20 @@ function Listing() {
       </div>
       <div className="flex justify-around my-5">
         <div>
-          <h2 className="text-3xl font-medium mb-5">Overview</h2>
+          <h2 className="text-3xl font-medium mb-5">Umumiy sharh</h2>
           <p className="text-xl">{listing.overview}</p>
         </div>
         <div>
-          <h2 className="text-3xl font-medium mb-5">Additional informations</h2>
-          <p className="text-xl font-medium">Version</p>
+          <h2 className="text-3xl font-medium mb-5">Qo'shimcha ma'lumotlar</h2>
+          <p className="text-xl font-medium">Versiya</p>
           <p className="text-xl mb-5">{listing.version}</p>
-          <p className="text-xl font-medium">Size</p>
+          <p className="text-xl font-medium">O'lchami</p>
           <p className="text-xl mb-5">{listing.size} </p>
-          <p className="text-xl font-medium">Updated</p>
+          <p className="text-xl font-medium">Yangilandi</p>
           <p className="text-xl mb-5">
             {day} {months[month]} {year}
           </p>
-          <p className="text-xl font-medium">Operating System</p>
+          <p className="text-xl font-medium">Operatsion Sistema</p>
           <p className="text-xl mb-5">{listing.os}</p>
           <p className="text-xl font-medium">
             {listing.os.includes('Windows')
@@ -162,13 +170,13 @@ function Listing() {
               : listing.os.includes('MacOS')
               ? 'CPU'
               : listing.os.includes('iOS')
-              ? 'Required version iOS'
+              ? "iOS'ning talab qilingan versiyasi"
               : listing.os.includes('Android')
-              ? 'Required version Android'
-              : 'Required version OS'}
+              ? "iOS'ning talab qilingan versiyasi"
+              : "OS'ning talab qilingan versiyasi"}
           </p>
           <p className="text-xl mb-5">{listing.cpu}</p>
-          <p className="text-xl font-medium">Languages</p>
+          <p className="text-xl font-medium">Tillar</p>
           <p className="text-xl mb-5">{listing.languages}</p>
         </div>
       </div>

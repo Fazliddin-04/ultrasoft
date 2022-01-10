@@ -102,13 +102,13 @@ function Profile() {
 
   return (
     <div>
-      <div className="text-6xl bg-base-300 p-8 font-bold my-3 flex items-center justify-between rounded-xl">
+      <div className="text-6xl bg-base-300 p-8 font-bold my-3 flex flex-wrap items-center justify-between gap-5 rounded-xl">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Hi {name.split(' ')[0]}!
+          Salom {name.split(' ')[0]}!
         </span>
 
         <button className="btn btn-secondary" type="button" onClick={onLogout}>
-          Log out
+          Chiqish
         </button>
       </div>
 
@@ -125,7 +125,7 @@ function Profile() {
                   setMenuListings(false)
                 }}
               >
-                <span>Personal Details</span>
+                <span>Shaxsiy ma'lumotlar</span>
               </li>
               <li
                 className={menuListings ? 'bordered' : ''}
@@ -133,7 +133,7 @@ function Profile() {
                   setMenuListings(true)
                 }}
               >
-                <span>Listings</span>
+                <span>Ro'yxatlar</span>
               </li>
             </ul>
           </div>
@@ -141,8 +141,8 @@ function Profile() {
             <ul className="p-4 shadow-lg bg-base-100 rounded-box h-full">
               {!menuListings ? (
                 <>
-                  <div className="flex items-center justify-between ">
-                    <p className="text-xl">Personal Details</p>
+                  <div className="flex items-center justify-between flex-wrap gap-5">
+                    <p className="text-xl">Shaxsiy ma'lumotlar</p>
                     <button
                       className="btn btn-active"
                       onClick={() => {
@@ -150,13 +150,13 @@ function Profile() {
                         setChangeDetails((prevState) => !prevState)
                       }}
                     >
-                      {changeDetails ? 'Done' : 'Change'}
+                      {changeDetails ? 'Bajarildi' : "O'zgartirish"}
                     </button>
                   </div>
 
                   <form className="form-control">
                     <label className="label">
-                      <span className="label-text">Name</span>
+                      <span className="label-text">Ism</span>
                     </label>
                     <input
                       type="text"
@@ -168,7 +168,7 @@ function Profile() {
                       onChange={onChange}
                     />
                     <label className="label">
-                      <span className="label-text">Name</span>
+                      <span className="label-text">Email</span>
                     </label>
                     <input
                       type="email"
@@ -191,13 +191,15 @@ function Profile() {
                       <span className="mr-2">
                         <i className="far fa-plus"></i>
                       </span>
-                      Create Listing
+                      Ro'yxat yaratish
                     </Link>
                   </div>
                   {!loading && listings?.length > 0 && (
-                    <div className="p-8 sm:p-0">
-                      <h2 className="text-3xl my-4 font-bold">Your Listings</h2>
-                      <ul className="p-0 grid gap-10 sm:grid-cols-2 place-content-center">
+                    <div className="p-4 sm:p-0">
+                      <h2 className="text-3xl my-4 font-bold">
+                        Sizning Ro'yhat
+                      </h2>
+                      <ul className="flex flex-wrap items-center p-0 gap-10">
                         {listings.map((listing) => (
                           <ListingItem
                             key={listing.id}
@@ -205,7 +207,8 @@ function Profile() {
                             id={listing.id}
                             onDelete={() => onDelete(listing.id)}
                             onEdit={() => onEdit(listing.id)}
-                            classes="card-compact lg:card-normal"
+                            classes="card-compact lg:card-side"
+                            cardFigureClass="explore-card-figure p-5"
                           />
                         ))}
                       </ul>

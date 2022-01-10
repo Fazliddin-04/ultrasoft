@@ -24,11 +24,11 @@ function App() {
         <div className='flex flex-col items-center justify-between min-h-screen'>
           <Navbar />
 
-          <main className='container mx-auto py-20'>
+          <main className='container mx-auto py-16'>
             <Routes>
               <Route path='/' element={<Explore />} />
-              <Route path='/category/:categoryName' element={<Category />} />
-              <Route path='/category/:categoryName/:listingId' element={<Listing />} />
+              <Route path='/:categoryType' element={<Category />} />
+              <Route path='/:categoryType/:categoryName/:listingId' element={<Listing />} />
               <Route path='/profile' element={<PrivateRoute />}>
                 <Route path='/profile' element={<Profile />} />
               </Route>

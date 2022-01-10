@@ -1,71 +1,186 @@
-import { Link, Routes, Route } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
-
-import SoftwareCategory from './SoftwareCategory'
-import MobileCategory from './MobileCategory'
-import SoftwareGamesCategory from './SoftwareGamesCategory'
-import MobileGamesCategory from './MobileGamesCategory'
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import CategoryContext from '../../context/CategoryContext'
 
 function Sidebar() {
-  const location = useLocation()
-
-  const pathMatchRoute = (route) => {
-    if (route === location.pathname) {
-      return true
-    }
-  }
+  const { gamesCategory, mobileCategory, softwareCategory } =
+    useContext(CategoryContext)
 
   return (
-    <div className="bg-accent-focus w-80 p-3">
-      <div className="p-4 artboard artboard-demo bg-base-200">
-        <ul
-          className="menu py-3 shadow-lg bg-base-100 rounded-box w-full"
-          id="main-menu"
-        >
-          <li className={pathMatchRoute('/software-category') && 'bordered'}>
-            <Link to="/software-category">Software</Link>
-          </li>
-          <li className={pathMatchRoute('/mobile-category') && 'bordered'}>
-            <Link to="/mobile-category">Mobile</Link>
-          </li>
-          <li
-            className={pathMatchRoute('/software-games-category') && 'bordered'}
-          >
-            <Link to="/software-games-category">Software Games</Link>
-          </li>
-          <li
-            className={pathMatchRoute('/mobile-games-category') && 'bordered'}
-          >
-            <Link to="/mobile-games-category">Mobile Games</Link>
-          </li>
-        </ul>
+    <>
+      <div className="collapse w-80 border  border-base-300 collapse-arrow">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium">
+          Kompyuter ilovalar
+        </div>
+        <div className="collapse-content">
+          <ul className="menu py-3 shadow-lg bg-base-100 rounded-box">
+            <li className="menu-title">
+              <span>Kompyuter ilovalar</span>
+            </li>
+            <li>
+              <Link to="/software-apps">Hammasi</Link>
+            </li>
+            {softwareCategory.map((category) => (
+              <li key={softwareCategory.indexOf(category)}>
+                <Link
+                  to={`/mobile-apps/${
+                    category.toLowerCase() === 'brauzerlar'
+                      ? 'browsers'
+                      : category.toLowerCase() === 'emulatorlar'
+                      ? 'emulators'
+                      : category.toLowerCase() === 'aloqa'
+                      ? 'communication'
+                      : category.toLowerCase() === "ta'lim"
+                      ? 'education'
+                      : category.toLowerCase() === 'grafik-tahrirchilar'
+                      ? 'graphic-editors'
+                      : category.toLowerCase() === 'matn-tahrirchilar'
+                      ? 'text-editors'
+                      : category.toLowerCase()
+                  }`}
+                >
+                  {category.replace(/-/g, ' ')}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div className="p-4 artboard artboard-demo bg-base-200 mt-2">
-        <ul className="menu py-3 shadow-lg bg-base-100 rounded-box w-full">
-          <li className="menu-title">
-            <span>Categories</span>
-          </li>
-          <Routes>
-            <Route
-              path="/software-category/*"
-              element={<SoftwareCategory funcHandler={pathMatchRoute} />}
-            />
-            <Route
-              path="/mobile-category/*"
-              element={<MobileCategory funcHandler={pathMatchRoute} />}
-            />
-            <Route
-              path="/software-games-category/*"
-              element={<SoftwareGamesCategory funcHandler={pathMatchRoute} />}
-            />
-            <Route
-              path="/mobile-games-category/*"
-              element={<MobileGamesCategory funcHandler={pathMatchRoute} />}
-            />
-          </Routes>
-        </ul>
+      <div className="collapse w-80 border border-base-300 collapse-arrow">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium">
+          Kompyuter o'yinlar
+        </div>
+        <div className="collapse-content">
+          <ul className="menu py-3 shadow-lg bg-base-100 rounded-box">
+            <li className="menu-title">
+              <span>Kompyuter o'yinlar</span>
+            </li>
+            <li>
+              <Link to="/software-games">Hammasi</Link>
+            </li>
+            {gamesCategory.map((category) => (
+              <li key={gamesCategory.indexOf(category)}>
+                <Link
+                  to={`/software-games/${
+                    category.toLowerCase() === 'sarguzasht'
+                      ? 'adventure'
+                      : category.toLowerCase() === 'arkada'
+                      ? 'arcade'
+                      : category.toLowerCase() === 'taxta'
+                      ? 'board'
+                      : category.toLowerCase() === 'karta'
+                      ? 'card'
+                      : category.toLowerCase() === 'tasodifiy'
+                      ? 'cusual'
+                      : category.toLowerCase() === "ta'limiy"
+                      ? 'educational'
+                      : category.toLowerCase() === 'boshqotirma'
+                      ? 'puzzle'
+                      : category.toLowerCase() === 'poyga'
+                      ? 'racing'
+                      : category.toLowerCase() === 'simulyator'
+                      ? 'simulator'
+                      : category.toLowerCase() === 'strategiya'
+                      ? 'simulator'
+                      : category.toLowerCase() === 'sport'
+                      ? 'sports'
+                      : category.toLowerCase()
+                  }`}
+                >
+                  {category.replace(/-/g, ' ')}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
+      <div className="collapse w-80 border border-base-300 collapse-arrow">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium">Mobil ilovalar</div>
+        <div className="collapse-content">
+          <ul className="menu py-3 shadow-lg bg-base-100 rounded-box">
+            <li className="menu-title">
+              <span>Mobil ilovalar</span>
+            </li>
+            <li>
+              <Link to="/mobile-apps">Hammasi</Link>
+            </li>
+            {mobileCategory.map((category) => (
+              <li key={mobileCategory.indexOf(category)}>
+                <Link
+                  to={`/mobile-apps/${
+                    category.toLowerCase() === "san'at-&-dizayn"
+                      ? 'art-&-design'
+                      : category.toLowerCase() === "kitob-&-ma'lumot"
+                      ? 'books-&-reference'
+                      : category.toLowerCase() === 'aloqa'
+                      ? 'communication'
+                      : category.toLowerCase() === "ta'lim"
+                      ? 'education'
+                      : category.toLowerCase() === 'grafik-tahrirchilar'
+                      ? 'graphic-editors'
+                      : category.toLowerCase() === 'matn-tahrirchilar'
+                      ? 'text-editors'
+                      : category.toLowerCase()
+                  }`}
+                >
+                  {category.replace(/-/g, ' ')}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="collapse w-80 border border-base-300 collapse-arrow">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium">Mobil o'yinlar</div>
+        <div className="collapse-content">
+          <ul className="menu py-3 shadow-lg bg-base-100 rounded-box">
+            <li className="menu-title">
+              <span>Mobil o'yinlar</span>
+            </li>
+            <li>
+              <Link to="/mobile-games">Hammasi</Link>
+            </li>
+            {gamesCategory.map((category) => (
+              <li key={gamesCategory.indexOf(category)}>
+                <Link
+                  to={`/software-games/${
+                    category.toLowerCase() === 'sarguzasht'
+                      ? 'adventure'
+                      : category.toLowerCase() === 'arkada'
+                      ? 'arcade'
+                      : category.toLowerCase() === 'taxta'
+                      ? 'board'
+                      : category.toLowerCase() === 'karta'
+                      ? 'card'
+                      : category.toLowerCase() === 'tasodifiy'
+                      ? 'cusual'
+                      : category.toLowerCase() === "ta'limiy"
+                      ? 'educational'
+                      : category.toLowerCase() === 'boshqotirma'
+                      ? 'puzzle'
+                      : category.toLowerCase() === 'poyga'
+                      ? 'racing'
+                      : category.toLowerCase() === 'simulyator'
+                      ? 'simulator'
+                      : category.toLowerCase() === 'strategiya'
+                      ? 'simulator'
+                      : category.toLowerCase() === 'sport'
+                      ? 'sports'
+                      : category.toLowerCase()
+                  }`}
+                >
+                  {category.replace(/-/g, ' ')}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </>
   )
 }
 

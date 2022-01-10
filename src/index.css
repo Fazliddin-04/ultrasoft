@@ -79,6 +79,9 @@
 
 .swiper-container {
   min-height: 225px;
+}
+
+.listing-slide-container .swiper-container {
   height: 23vw;
 }
 
@@ -89,6 +92,10 @@
 
 .card figure > img {
   max-width: 15rem !important;
+}
+
+.card figure.explore-card-figure > img {
+  max-width: 10rem !important;
 }
 
 /* 
@@ -137,10 +144,25 @@
   height: auto !important;
 } */
 
-.bg-white-20 {
-  background-color: rgba(0, 0, 0, 0.2);
+.bg-dark-30 {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .indicator .indicator-item.indicator-top.after-delIcon {
-    top: 40px;
+  top: 40px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4506cb; 
 }

@@ -30,7 +30,7 @@ function Category() {
         // create a query
         const q = query(
           listingsRef,
-          where('type', '==', params.categoryName),
+          where('type', '==', params.categoryType),
           orderBy('timestamp', 'desc'),
           limit(10)
         )
@@ -53,12 +53,12 @@ function Category() {
         setListings(listings)
         setLoading(false)
       } catch (error) {
-        toast.error('Could not fetch listings')
+        toast.error("Ro'yhatlarni olib kelib bo'lmadi")
       }
     }
 
     fetchListings()
-  }, [params.categoryName])
+  }, [params.categoryType])
 
   // Pagination / Load More
   const onFetchMoreListings = async () => {
@@ -69,7 +69,7 @@ function Category() {
       // create a query
       const q = query(
         listingsRef,
-        where('type', '==', params.categoryName),
+        where('type', '==', params.categoryType),
         orderBy('timestamp', 'desc'),
         startAfter(lastFetchedListing),
         limit(10)
@@ -93,7 +93,7 @@ function Category() {
       setListings((prevState) => [...prevState, ...listings])
       setLoading(false)
     } catch (error) {
-      toast.error('Could not fetch listings')
+      toast.error("Ro'yhatlarni olib kelib bo'lmadi")
     }
   }
 
@@ -101,7 +101,15 @@ function Category() {
     <div className="m-10">
       <header className="bg-base-300 p-4 rounded-xl">
         <p className="text-3xl font-bold tracking-wide">
-          {params.categoryName.toUpperCase().replace('-', ' ')}
+          {params.categoryType === 'software-apps'
+            ? 'Kompyuter ilovalar'
+            : params.categoryType === 'software-games'
+            ? "Kompyuter o'yinlar"
+            : params.categoryType === 'mobile-apps'
+            ? 'Mobil ilovalar'
+            : params.categoryType === 'mobile-games'
+            ? "Mobil o'yinlar"
+            : params.categoryType.toUpperCase().replace('-', ' ')}
         </p>
       </header>
 
@@ -125,12 +133,12 @@ function Category() {
           <br />
           {lastFetchedListing && (
             <p className="mx-auto btn btn-ghost" onClick={onFetchMoreListings}>
-              Load More
+              Ko'proq yuklash
             </p>
           )}
         </>
       ) : (
-        <p>No listings for {params.categoryName}</p>
+        <p>{params.categoryType} uchun ro'yhatlar yo'q</p>
       )}
     </div>
   )

@@ -7,8 +7,8 @@ function Navbar({ title }) {
   return (
     <div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content fixed top-0 w-full z-50">
       <div className="px-2 mx-2 navbar-start">
-        <Link to="/" className="text-4xl font-extrabold">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
+        <Link to="/" className="text-2xl sm:text-3xl lg:text-4xl font-extrabold">
+          <span className="bg-clip-text uppercase text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
             {title}
           </span>
         </Link>
@@ -19,39 +19,39 @@ function Navbar({ title }) {
             <div className="inline-block w-5 mr-2 stroke-current">
               <i className="far fa-home"></i>
             </div>
-            Home
+            Bosh sahifa
           </Link>
           <Link to="/likes" className="btn btn-ghost btn-sm rounded-btn">
             <div className="inline-block w-5 mr-2 stroke-current">
               <i className="far fa-heart"></i>
             </div>
-            Likes
+            Xush kelganlari
           </Link>
           <Link to="/files" className="btn btn-ghost btn-sm rounded-btn">
             <div className="inline-block w-5 mr-2 stroke-current">
               <i className="far fa-folder"></i>
             </div>
-            Files
+            Fayllarim
           </Link>
           <div className="dropdown dropdown-end px-0">
             <div tabIndex="0" className="btn btn-ghost rounded-btn btn-sm">
               <div className="inline-block w-5 mr-2 stroke-current">
                 <i className="fal fa-globe"></i>
               </div>
-              Language
+              Til
             </div>
             <ul
               tabIndex="0"
               className="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52"
             >
-              <li>
-                <Link to="/en">English</Link>
+              {/* <li>
+                <Link to="/">English</Link>
               </li>
               <li>
-                <Link to="/ru">Russian</Link>
-              </li>
+                <Link to="/">Russian</Link>
+              </li> */}
               <li>
-                <Link to="/uz">Uzbek</Link>
+                <Link to="/">Uzbek</Link>
               </li>
             </ul>
           </div>
@@ -74,7 +74,7 @@ function Navbar({ title }) {
           className="btn btn-primary btn-sm"
           onClick={() => navigate('/profile')}
         >
-          Profile
+          shaxsiy Hisob
         </button>
       </div>
     </div>

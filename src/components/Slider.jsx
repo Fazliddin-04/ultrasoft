@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import Spinner from './Spinner'
+import ListingItem from './ListingItem'
 
 import SwiperCore, {
   Autoplay,
@@ -43,52 +44,75 @@ function Slider() {
     return <Spinner />
   }
 
-if (listings.length === 0) {
-  return <></>
-}
+  if (listings.length === 0) {
+    return <></>
+  }
 
   return (
     listings && (
-      <>
-        <p className="text-5xl sm:text-6xl font-extrabold my-6">
+      <div className="bg-base-300 pb-8 rounded-b-xl">
+        <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-            Recommended
+            Ommabop materiallar
           </span>
         </p>
 
         <Swiper
           slidesPerView={1}
+          spaceBetween={30}
+          navigation={true}
           pagination={{ clickable: true }}
-          className="bg-base-200 rounded-xl w-11/12"
+          className="w-full "
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
           }}
           loop={true}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1280: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
         >
           {listings.map(({ data, id }) => (
             <SwiperSlide
               key={id}
               onClick={() => navigate(`/category/${data.type}/${id}`)}
+              className="flex items-center justify-center"
             >
-              <div
-                style={{
-                  background: `center / cover no-repeat url(${
-                    data.imageUrls[data.imageUrls.length - 1]
-                  })`,
-                }}
-                className="w-full h-full relative flex justify-end items-end "
-              >
-                <p className="text-5xl font-bold text-white backdrop-filter backdrop-blur-lg bg-white-20 mr-10 mb-10 w-90 p-4 shadow-2xl rounded-xl">
-                  {data.overview}
-                </p>
-              </div>
+              <ListingItem listing={data} id={id} bodyClasses="bg-neutral" />
             </SwiperSlide>
           ))}
         </Swiper>
-      </>
+      </div>
     )
   )
 }
+
+/* <div
+  style={{
+    background: `center / cover no-repeat url(${
+      data.imageUrls[data.imageUrls.length - 1]
+    })`,
+  }}
+  className="w-full h-full relative flex justify-end items-end "
+>
+  <p className="text-5xl font-bold text-white backdrop-filter backdrop-blur-lg bg-white-20 mr-10 mb-10 w-90 p-4 shadow-2xl rounded-xl">
+    {data.overview}
+  </p>
+</div> */
 
 export default Slider

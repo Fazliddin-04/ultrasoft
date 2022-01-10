@@ -1,21 +1,38 @@
 import { Link } from 'react-router-dom'
 
-function ListingItem({ listing, id, onEdit, onDelete, classes }) {
+function ListingItem({
+  listing,
+  id,
+  onEdit,
+  onDelete,
+  classes,
+  bodyClasses,
+  cardFigureClass,
+}) {
   return (
-    <li class="indicator">
+    <li className="indicator">
       <Link
-        to={`/category/${listing.type}/${id}`}
+        to={`/${listing.type}/${listing.category}/${id}`}
         className={`card card-bordered ${
           classes ? classes : ''
-        } bg-base-300 h-full transition hover:shadow-xl`}
+        } transition hover:shadow-xl`}
       >
-        <figure className="flex-1 flex items-center justify-center p-2">
+        <figure
+          className={`${
+            cardFigureClass
+              ? cardFigureClass
+              : 'flex items-center justify-center p-2'
+          }`}
+        >
           <img src={listing.iconUrl[0]} alt={listing.name} />
         </figure>
-        <div className="card-body flex-1 bg-neutral justify-between">
+        <div className={`card-body ${bodyClasses}`}>
           <h2 className="card-title">
             {listing.name}
-            <div className="badge mx-2 badge-secondary">NEW</div>
+            {new Date(listing.timestamp.seconds * 1000).getDate() ===
+              new Date().getDate() && (
+              <div className="badge mx-2 badge-secondary uppercase">yangi</div>
+            )}
           </h2>
           {/* Vote Average */}
           <div className="card-actions">
@@ -26,20 +43,21 @@ function ListingItem({ listing, id, onEdit, onDelete, classes }) {
         </div>
       </Link>
       {onDelete && (
-        <div
-          class="indicator-item badge badge-ghost text-red-700 text-2xl p-4"
-          onClick={() => onDelete(listing.id, listing.name)}
-        >
-          <i className="far fa-trash-alt"></i>
-        </div>
-      )}
-
-      {onEdit && (
-        <div
-          className="indicator-item indicator-top after-delIcon indicator-end badge badge-ghost text-yellow-500 text-2xl p-4"
-          onClick={() => onEdit(id)}
-        >
-          <i className="far fa-edit"></i>
+        <div className="indicator-item indicator-bottom indicator-center flex items-center gap-5 text-center">
+          <div
+            className=" badge badge-ghost text-red-700 text-2xl px-2 py-4"
+            onClick={() => onDelete(listing.id, listing.name)}
+          >
+            <i className="far fa-trash-alt"></i>
+          </div>
+          {onEdit && (
+            <div
+              className="badge badge-ghost text-yellow-500 text-2xl px-2 py-4"
+              onClick={() => onEdit(id)}
+            >
+              <i className="far fa-edit"></i>
+            </div>
+          )}
         </div>
       )}
     </li>

@@ -97,13 +97,13 @@ function CreateListing() {
 
     if (images.length > 6) {
       setLoading(false)
-      toast.error('Max 6 images')
+      toast.error('Max 6 rasm')
       return
     }
 
     if (icon.length > 1) {
       setLoading(false)
-      toast.error('Max 1 icon')
+      toast.error('Max 1 ikonka')
       return
     }
 
@@ -152,7 +152,7 @@ function CreateListing() {
       [...images].map((image) => storeImage(image))
     ).catch(() => {
       setLoading(false)
-      toast.error('Images not uploaded')
+      toast.error('Suratlar yuklanmadi')
       return
     })
 
@@ -160,7 +160,7 @@ function CreateListing() {
       [...icon].map((image) => storeImage(image))
     ).catch(() => {
       setLoading(false)
-      toast.error('Icon not uploaded')
+      toast.error('Ikonka yuklanmadi')
       return
     })
 
@@ -188,7 +188,7 @@ function CreateListing() {
     <>
       <header className="text-5xl sm:text-6xl font-extrabold text-center my-6">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Create Listing
+          Ro'yxat Yaratish
         </span>
       </header>
 
@@ -200,7 +200,7 @@ function CreateListing() {
               name="type"
               value="software-apps"
               id="type"
-              data-title="software apps"
+              data-title="kompyuter ilova"
               className="btn"
               onClick={onMutate}
             />
@@ -209,7 +209,7 @@ function CreateListing() {
               name="type"
               value="mobile-apps"
               id="type"
-              data-title="mobile apps"
+              data-title="mobil ilova"
               className="btn"
               onClick={onMutate}
             />
@@ -218,7 +218,7 @@ function CreateListing() {
               name="type"
               value="software-games"
               id="type"
-              data-title="software games"
+              data-title="kompyuter o'yin"
               className="btn"
               onClick={onMutate}
             />
@@ -227,7 +227,7 @@ function CreateListing() {
               name="type"
               value="mobile-games"
               id="type"
-              data-title="mobile games"
+              data-title="mobil o'yin"
               className="btn"
               onClick={onMutate}
             />
@@ -282,7 +282,7 @@ function CreateListing() {
           </div>
 
           <label className="label">
-            <span className="label-text">Name</span>
+            <span className="label-text">Nomi</span>
           </label>
           <input
             type="text"
@@ -291,14 +291,14 @@ function CreateListing() {
             value={name}
             onChange={onMutate}
             className="input"
-            placeholder="Application Name"
+            placeholder="Ilova nomi"
             required
           />
 
           <div className="grid grid-cols-3 grid-rows-2">
             <div className="pr-10">
               <label className="label">
-                <span className="label-text">Version</span>
+                <span className="label-text">Versiya</span>
               </label>
               <input
                 type="text"
@@ -307,19 +307,19 @@ function CreateListing() {
                 onChange={onMutate}
                 id="version"
                 className="input w-full"
-                placeholder="Version"
+                placeholder="Ilova Versiyasi"
               />
             </div>
             <div className="pr-10">
               <label className="label">
-                <span className="label-text">Age Limit</span>
+                <span className="label-text">Yosh Chegarasi</span>
               </label>
               <input
                 type="number"
                 name="ageLimit"
                 id="ageLimit"
                 className="input w-full"
-                placeholder="Age Limit"
+                placeholder="Yosh Chegarasi"
                 value={ageLimit}
                 onChange={onMutate}
                 min="0"
@@ -328,7 +328,7 @@ function CreateListing() {
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Operating System (OS)</span>
+                <span className="label-text">Operatsion Sistema (OS)</span>
               </label>
               <input
                 type="text"
@@ -349,10 +349,10 @@ function CreateListing() {
                     : os.includes('MacOS')
                     ? 'CPU'
                     : os.includes('iOS')
-                    ? 'Required version iOS'
+                    ? "iOS'ning talab qilingan versiyasi"
                     : os.includes('Android')
-                    ? 'Required version Android'
-                    : 'Required version OS'}
+                    ? "iOS'ning talab qilingan versiyasi"
+                    : "OS'ning talab qilingan versiyasi"}
                 </span>
               </label>
               <input
@@ -378,7 +378,7 @@ function CreateListing() {
             </div>
             <div className="pr-10">
               <label className="label">
-                <span className="label-text">Size</span>
+                <span className="label-text">O'lcham</span>
               </label>
               <input
                 type="text"
@@ -387,13 +387,13 @@ function CreateListing() {
                 value={size}
                 onChange={onMutate}
                 className="input w-full"
-                placeholder="Show the full size with MB or GB"
+                placeholder="Umumiy o'lchamni MB yoki GB orqali ko'rsating"
                 required
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Link to download</span>
+                <span className="label-text">Yuklash uchun Link</span>
               </label>
               <input
                 type="text"
@@ -402,12 +402,12 @@ function CreateListing() {
                 value={linkToDownload}
                 onChange={onMutate}
                 className="input w-full"
-                placeholder="Link to download"
+                placeholder="https://. . ."
               />
             </div>
           </div>
           <label className="label">
-            <span className="label-text">Languages</span>
+            <span className="label-text">Tillar</span>
           </label>
           <input
             type="text"
@@ -416,11 +416,11 @@ function CreateListing() {
             value={languages}
             onChange={onMutate}
             className="input w-full"
-            placeholder="Languages"
+            placeholder="Ilovada mavjud tillar"
             required
           />
           <label className="label">
-            <span className="label-text">Overview</span>
+            <span className="label-text">Umumiy sharh</span>
           </label>
           <textarea
             className="textarea h-24"
@@ -431,7 +431,7 @@ function CreateListing() {
             placeholder=". . ."
             required
           ></textarea>
-          <label className="label">Icon</label>
+          <label className="label">Ikonka (ilova belgisi)</label>
           <input
             className="formInputFile bg-base-100 rounded-xl p-2"
             type="file"
@@ -456,10 +456,12 @@ function CreateListing() {
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
-              <label>Max 1 image for icon</label>
+              <label>
+                Ikonka uchun Max 1 surat (.png format tavsiya etiladi)
+              </label>
             </div>
           </div>
-          <label className="label">Images</label>
+          <label className="label">Suratlar</label>
 
           <input
             className="formInputFile bg-base-100 rounded-xl p-2"
@@ -486,11 +488,11 @@ function CreateListing() {
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
-              <label>The first image will be the cover (max 6)</label>
+              <label>Max 6 surat</label>
             </div>
           </div>
           <button type="submit" className="btn btn-primary mt-10">
-            Create Listing
+            Yaratish
           </button>
         </form>
       </main>

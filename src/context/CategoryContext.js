@@ -7,40 +7,40 @@ export const CategoryProvider = ({ children }) => {
   const [softwareCategory, setSoftwareCategory] = useState([
     'Adobe',
     'Antivirus',
-    'Browsers',
-    'Communication',
-    'Education',
-    'Emulators',
-    'Graphic-editors',
+    'Brauzerlar',
+    'Aloqa',
+    'Ta\'lim',
+    'Emulatorlar',
+    'Grafik-tahrirchilar',
     'Media',
-    'Text-editors',
+    'Matn-tahrirchilar',
   ])
 
   // eslint-disable-next-line
   const [mobileCategory, setMobileCategory] = useState([
-    'Art-&-Design',
-    'Books-&-Reference',
-    'Communication',
-    'Education',
-    'Graphic-editors',
+    'San\'at-&-Dizayn',
+    'Kitob-&-ma\'lumot',
+    'Aloqa',
+    'Ta\'lim',
+    'Grafik-tahrirchilar',
     'Media',
-    'Text-editors',
+    'Matn-tahrirchilar',
   ])
 
   // eslint-disable-next-line
   const [gamesCategory, setGamesCategory] = useState([
     'Action',
-    'Adventure',
-    'Arcade',
-    'Board',
-    'Card',
-    'Cusual',
-    'Educational',
-    'Puzzle',
-    'Racing',
-    'Simulation',
-    'Strategy',
-    'Sports',
+    'Sarguzasht',
+    'Arkada',
+    'Taxta',
+    'Karta',
+    'Tasodifiy',
+    'Ta\'limiy',
+    'Boshqotirma',
+    'Poyga',
+    'Simulyator',
+    'Strategiya',
+    'Sport',
   ])
 
   return (
