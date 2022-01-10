@@ -124,6 +124,7 @@ function Category() {
                   listing={listing.data}
                   id={listing.id}
                   key={listing.id}
+                  bodyClasses='bg-neutral'
                 />
               ))}
             </ul>
