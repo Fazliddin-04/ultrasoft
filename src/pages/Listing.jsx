@@ -170,7 +170,7 @@ function Listing() {
               : listing.os.includes('iOS')
               ? "iOS'ning talab qilingan versiyasi"
               : listing.os.includes('Android')
-              ? "iOS'ning talab qilingan versiyasi"
+              ? "Android'ning talab qilingan versiyasi"
               : "OS'ning talab qilingan versiyasi"}
           </p>
           <p className="text-xl mb-5">{listing.cpu}</p>
