@@ -24,7 +24,7 @@ function Sidebar() {
             {softwareCategory.map((category) => (
               <li key={softwareCategory.indexOf(category)}>
                 <Link
-                  to={`/mobile-apps/${
+                  to={`/software-apps/${
                     category.toLowerCase() === 'brauzerlar'
                       ? 'browsers'
                       : category.toLowerCase() === 'emulatorlar'
@@ -147,7 +147,7 @@ function Sidebar() {
             {gamesCategory.map((category) => (
               <li key={gamesCategory.indexOf(category)}>
                 <Link
-                  to={`/software-games/${
+                  to={`/mobile-games/${
                     category.toLowerCase() === 'sarguzasht'
                       ? 'adventure'
                       : category.toLowerCase() === 'arkada'
