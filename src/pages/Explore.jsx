@@ -181,58 +181,5 @@ function Explore() {
     </>
   )
 }
-// <div className="grid m-10 gap-10 sm:grid-cols-2 grid-rows-2 w-11/12 mx-auto">
-//   <div className="card shadow-xl image-full">
-//     <figure>
-//       <div className="h-full uigradient-1"></div>
-//     </figure>
-//     <div className="justify-end card-body items-center text-center">
-//       <h2 className="card-title text-4xl">Kompyuter ilovalar</h2>
-//       <div className="card-actions">
-//         <Link to="/category/software-apps">
-//           <button className="btn btn-outline">Sahifaga o'tish</button>
-//         </Link>
-//       </div>
-//     </div>
-//   </div>
-//   <div className="card shadow-xl image-full">
-//     <figure>
-//       <div className="h-full uigradient-2"></div>
-//     </figure>
-//     <div className="justify-end card-body items-center text-center">
-//       <h2 className="card-title text-4xl">Mobil ilovalar</h2>
-//       <div className="card-actions">
-//         <Link to="/category/mobile-apps">
-//           <button className="btn btn-outline">Sahifaga o'tish</button>
-//         </Link>
-//       </div>
-//     </div>
-//   </div>
-//   <div className="card shadow-xl image-full">
-//     <figure>
-//       <div className="h-full uigradient-3"></div>
-//     </figure>
-//     <div className="justify-end card-body items-center text-center">
-//       <h2 className="card-title text-4xl">Kompyuter o'yinlar</h2>
-//       <div className="card-actions">
-//         <Link to="/category/software-games">
-//           <button className="btn btn-outline">Sahifaga o'tish</button>
-//         </Link>
-//       </div>
-//     </div>
-//   </div>
-//   <div className="card shadow-xl image-full">
-//     <figure>
-//       <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500"></div>
-//     </figure>
-//     <div className="justify-end card-body items-center text-center">
-//       <h2 className="card-title text-4xl">Mobil o'yinlar</h2>
-//       <div className="card-actions">
-//         <Link to="/category/mobile-games">
-//           <button className="btn btn-outline">Sahifaga o'tish</button>
-//         </Link>
-//       </div>
-//     </div>
-//   </div>
-// </div>
+
 export default Explore
