@@ -141,7 +141,9 @@ function Explore() {
                     Yuklab olish
                   </a>
                   <Link to={`/${data.type}/${data.category}/${id}`}>
-                    <button className="btn btn-ghost">Ko'proq ma'lumot</button>
+                    <button className="btn btn-outline">
+                      Ko'proq ma'lumot
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -150,7 +152,10 @@ function Explore() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className="mx-auto btn btn-ghost" onClick={onFetchMoreListings}>
+            <p
+              className="mx-auto btn btn-outline"
+              onClick={onFetchMoreListings}
+            >
               Ko'proq yuklash
             </p>
           )}
