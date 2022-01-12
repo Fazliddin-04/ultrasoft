@@ -127,7 +127,10 @@ function SingleCategory() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className="mx-auto btn btn-ghost" onClick={onFetchMoreListings}>
+            <p
+              className="mx-auto btn btn-outline"
+              onClick={onFetchMoreListings}
+            >
               Ko'proq yuklash
             </p>
           )}
