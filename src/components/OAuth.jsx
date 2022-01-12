@@ -5,7 +5,6 @@ import { db } from '../firebase.config'
 import { toast } from 'react-toastify'
 import googleIcon from '../assets/svg/googleIcon.svg'
 
-
 function OAuth() {
   const navigate = useNavigate()
   const location = useLocation()
@@ -26,19 +25,27 @@ function OAuth() {
         await setDoc(doc(db, 'users', user.uid), {
           name: user.displayName,
           email: user.email,
-          tiemstamp: serverTimestamp() 
+          tiemstamp: serverTimestamp(),
         })
       }
       navigate('/')
     } catch (error) {
-      toast.error('Could not authorize with Google')
+      toast.error("Google bilan avtorizatsiya qilib bo'lmadi")
     }
   }
 
   return (
-    <div className='flex flex-col items-center gap-5'>
-      <p>Sign {location.pathname === '/sign-up' ? 'up' : 'in'} with</p>
-      <button className="btn btn-circle btn-active btn-lg p-3" onClick={onGoogleClick}>
+    <div className="flex flex-col items-center gap-5">
+      <p>
+        Google hisob orqali{' '}
+        {location.pathname === '/sign-up'
+          ? "ro'yxatdan o'ting"
+          : 'tizimga kiring'}
+      </p>
+      <button
+        className="btn btn-circle btn-active btn-lg p-3"
+        onClick={onGoogleClick}
+      >
         <img src={googleIcon} alt="google" />
       </button>
     </div>
