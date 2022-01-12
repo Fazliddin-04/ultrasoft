@@ -23,13 +23,14 @@ function CreateListing() {
     ageLimit: 0,
     category: '',
     cpu: '',
-    images: [],
     icon: [],
+    images: [],
     languages: '',
     linkToDownload: '',
     name: '',
-    overview: '',
     os: '',
+    overview: '',
+    recommended: false,
     size: '',
     type: '',
     version: '',
@@ -39,13 +40,14 @@ function CreateListing() {
   const {
     ageLimit,
     cpu,
-    images,
     icon,
+    images,
     languages,
     linkToDownload,
     name,
-    overview,
     os,
+    overview,
+    recommended,
     size,
     type,
     version,
@@ -73,6 +75,15 @@ function CreateListing() {
   }, [isMounted])
 
   const onMutate = (e) => {
+    let isChecked = e.target.checked
+    let boolean = null
+
+    if (isChecked === true) {
+      boolean = true
+    } else if (isChecked === false) {
+      boolean = false
+    }
+
     // Files
     if (e.target.files) {
       setFormData((prevState) => ({
@@ -81,11 +92,11 @@ function CreateListing() {
       }))
     }
 
-    // text/numbers
+    // text/numbers/boolean
     if (!e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
-        [e.target.id]: e.target.value,
+        [e.target.id]: boolean ?? e.target.value,
       }))
     }
   }
@@ -441,18 +452,18 @@ function CreateListing() {
             accept=".jpg,.png,.jpeg"
             required
           />
-          <div class="alert alert-info">
-            <div class="flex-1">
+          <div className="alert alert-info">
+            <div className="flex-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="w-6 h-6 mx-2 stroke-current"
+                className="w-6 h-6 mx-2 stroke-current"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
@@ -473,23 +484,36 @@ function CreateListing() {
             multiple
             required
           />
-          <div class="alert alert-info">
-            <div class="flex-1">
+          <div className="alert alert-info">
+            <div className="flex-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                class="w-6 h-6 mx-2 stroke-current"
+                className="w-6 h-6 mx-2 stroke-current"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
               <label>Max 6 surat</label>
             </div>
+          </div>
+          <div className="p-6 w-max mx-auto">
+            <label className="cursor-pointer label">
+              <span className="label-text">Asosiy sahifada tavsiya qilish</span>
+              <input
+                type="checkbox"
+                onChange={onMutate}
+                id="recommended"
+                checked={recommended ? 'checked' : ''}
+                value={recommended}
+                className="checkbox checkbox-primary ml-5"
+              />
+            </label>
           </div>
           <button type="submit" className="btn btn-primary mt-10">
             Yaratish
