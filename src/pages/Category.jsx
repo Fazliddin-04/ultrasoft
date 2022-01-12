@@ -124,7 +124,7 @@ function Category() {
                   listing={listing.data}
                   id={listing.id}
                   key={listing.id}
-                  bodyClasses='bg-neutral'
+                  bodyClasses="bg-secondary"
                 />
               ))}
             </ul>
@@ -133,13 +133,27 @@ function Category() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className="mx-auto btn btn-ghost" onClick={onFetchMoreListings}>
+            <p
+              className="mx-auto btn btn-outline"
+              onClick={onFetchMoreListings}
+            >
               Ko'proq yuklash
             </p>
           )}
         </>
       ) : (
-        <p>{params.categoryType} uchun ro'yhatlar yo'q</p>
+        <p className="text-center mx-auto my-10 w-max">
+          {params.categoryType === 'software-apps'
+            ? 'Kompyuter ilovalar'
+            : params.categoryType === 'software-games'
+            ? "Kompyuter o'yinlar"
+            : params.categoryType === 'mobile-apps'
+            ? 'Mobil ilovalar'
+            : params.categoryType === 'mobile-games'
+            ? "Mobil o'yinlar"
+            : params.categoryType.toUpperCase().replace('-', ' ')}{' '}
+          uchun ro'yxatlar yo'q
+        </p>
       )}
     </div>
   )
