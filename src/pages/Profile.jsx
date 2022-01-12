@@ -127,14 +127,27 @@ function Profile() {
               >
                 <span>Shaxsiy ma'lumotlar</span>
               </li>
-              <li
-                className={menuListings ? 'bordered' : ''}
-                onClick={() => {
-                  setMenuListings(true)
-                }}
-              >
-                <span>Ro'yxatlar</span>
-              </li>
+              {auth.currentUser.uid === 'Hcmq9D3NnRbp2NrDTF499tNCU2H2' ? (
+                <li
+                  className={menuListings ? 'bordered' : ''}
+                  onClick={() => {
+                    setMenuListings(true)
+                  }}
+                >
+                  <span>Ro'yxatlar</span>
+                </li>
+              ) : auth.currentUser.uid === 'jU9RlhVGJqVfqHi0GSlURRFGdKC2' ? (
+                <li
+                  className={menuListings ? 'bordered' : ''}
+                  onClick={() => {
+                    setMenuListings(true)
+                  }}
+                >
+                  <span>Ro'yxatlar</span>
+                </li>
+              ) : (
+                <></>
+              )}
             </ul>
           </div>
           <div className="p-4 bg-base-200 flex-1 rounded-xl h-full w-full xl:ml-2">
@@ -197,7 +210,7 @@ function Profile() {
                   {!loading && listings?.length > 0 && (
                     <div className="p-4 sm:p-0">
                       <h2 className="text-3xl my-4 font-bold">
-                        Sizning Ro'yhat
+                        Sizning Ro'yxatlar
                       </h2>
                       <ul className="flex flex-wrap items-center p-0 gap-10">
                         {listings.map((listing) => (
