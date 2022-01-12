@@ -124,7 +124,7 @@ function Category() {
                   listing={listing.data}
                   id={listing.id}
                   key={listing.id}
-                  bodyClasses="bg-neutral"
+                  bodyClasses="bg-secondary"
                 />
               ))}
             </ul>
@@ -133,7 +133,10 @@ function Category() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p className="mx-auto btn btn-ghost" onClick={onFetchMoreListings}>
+            <p
+              className="mx-auto btn btn-outline"
+              onClick={onFetchMoreListings}
+            >
               Ko'proq yuklash
             </p>
           )}

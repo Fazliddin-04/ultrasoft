@@ -45,7 +45,8 @@
   width: 64px;
   height: 64px;
   border: 8px solid;
-  border-color: #f000b8 transparent #f000b8 transparent;
+  border-color: hsla(var(--s) / var(--tw-bg-opacity, 1)) transparent
+    hsla(var(--s) / var(--tw-bg-opacity, 1)) transparent;
   border-radius: 50%;
   animation: spin 1s ease infinite;
 }
@@ -68,7 +69,7 @@
   width: 100%;
 }
 .formInputFile::-webkit-file-upload-button {
-  background-color: #f000b8;
+  background-color: hsla(var(--s) / var(--tw-bg-opacity, 1));
   border: none;
   color: #ffffff;
   font-weight: 600;
@@ -159,10 +160,133 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3); 
+  background: rgba(0, 0, 0, 0);
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #4506cb; 
+  background: hsla(var(--s) / var(--tw-bg-opacity, 1));
+}
+
+.btn-animate {
+  position: relative;
+  display: inline-block;
+  padding: 25px 30px;
+  color: hsla(var(--s) / var(--tw-bg-opacity, 1));
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: white;
+}
+
+.btn-animate:hover {
+  background: hsla(var(--s) / var(--tw-bg-opacity, 1));
+  color: #f3f3f3;
+  box-shadow: 0 0 5px hsla(var(--s) / var(--tw-bg-opacity, 1)),
+    0 0 25px hsla(var(--s) / var(--tw-bg-opacity, 1)),
+    0 0 50px hsla(var(--s) / var(--tw-bg-opacity, 1)),
+    0 0 200px hsla(var(--s) / var(--tw-bg-opacity, 1));
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #ffffff55);
+}
+
+.btn-animate span {
+  position: absolute;
+  display: block;
+}
+
+.btn-animate span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(var(--s) / var(--tw-bg-opacity, 1))
+  );
+  animation: animate1 1s linear infinite;
+}
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.btn-animate span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    hsla(var(--s) / var(--tw-bg-opacity, 1))
+  );
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.btn-animate span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(
+    270deg,
+    transparent,
+    hsla(var(--s) / var(--tw-bg-opacity, 1))
+  );
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.btn-animate span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 10px;
+  height: 100%;
+  background: linear-gradient(
+    360deg,
+    transparent,
+    hsla(var(--s) / var(--tw-bg-opacity, 1))
+  );
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+option {
+  background-color: hsla(var(--s) / var(--tw-bg-opacity, 1));
 }

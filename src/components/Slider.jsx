@@ -93,7 +93,7 @@ function Slider() {
               onClick={() => navigate(`/category/${data.type}/${id}`)}
               className="flex items-center justify-center"
             >
-              <ListingItem listing={data} id={id} bodyClasses="bg-neutral" />
+              <ListingItem listing={data} id={id} bodyClasses="bg-secondary" />
             </SwiperSlide>
           ))}
         </Swiper>

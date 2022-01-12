@@ -21,9 +21,12 @@ function Footer() {
       </div>
       <div>
         <div className="flex items-center justify-center">
-          <a href="https://t.me/UltraSoft_uz" className="flex flex-col-reverse items-center font-bold gap-5 text-xl mx-2">
+          <a
+            href="https://t.me/UltraSoft_uz"
+            className="flex flex-col-reverse items-center font-bold gap-5 text-xl mx-2"
+          >
             <i className="fab fa-telegram-plane fa-2x"></i>
-            Follow on Telegram
+            Telegramda kuzatib boring
           </a>
         </div>
       </div>

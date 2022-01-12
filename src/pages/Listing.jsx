@@ -94,7 +94,7 @@ function Listing() {
           <li>{listing.name}</li>
         </ul>
       </div>
-      <div className="flex items-center justify-between my-5">
+      <div className="flex flex-wrap items-center justify-center sm:justify-between my-5 w-4/5 mx-auto">
         <div className="flex items-center">
           <span className="h-40 w-40 bg-base-300 mask mask-squircle flex items-center mr-5">
             <img src={listing.iconUrl[0]} alt="icon" className="object-cover" />
@@ -119,9 +119,13 @@ function Listing() {
         <div>
           <a
             href={listing.linkToDownload}
-            className="btn btn-primary"
+            className="btn btn-wide btn-lg btn-animate"
             download={`${listing.name}_${listing.version}.exe`}
           >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
             Yuklab olish
           </a>
         </div>
@@ -132,6 +136,7 @@ function Listing() {
           navigation={true}
           pagination={{ clickable: true }}
           className="w-5/6 "
+          loop={true}
         >
           {listing.imageUrls.map((url, index) => (
             <SwiperSlide key={index}>
@@ -150,7 +155,7 @@ function Listing() {
           <h2 className="text-3xl font-medium mb-5">Umumiy sharh</h2>
           <p className="text-xl">{listing.overview}</p>
         </div>
-        <div>
+        <div className="w-max">
           <h2 className="text-3xl font-medium mb-5">Qo'shimcha ma'lumotlar</h2>
           <p className="text-xl font-medium">Versiya</p>
           <p className="text-xl mb-5">{listing.version}</p>

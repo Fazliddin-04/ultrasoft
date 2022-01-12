@@ -6,12 +6,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
-import {
-  doc,
-  updateDoc,
-  getDoc,
-  serverTimestamp,
-} from 'firebase/firestore'
+import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../components/Spinner'
@@ -29,13 +24,14 @@ function EditListing() {
     ageLimit: 0,
     category: '',
     cpu: '',
-    images: [],
     icon: [],
+    images: [],
     languages: '',
     linkToDownload: '',
     name: '',
-    overview: '',
     os: '',
+    overview: '',
+    recommended: false,
     size: '',
     type: '',
     version: '',
@@ -45,13 +41,14 @@ function EditListing() {
   const {
     ageLimit,
     cpu,
-    images,
     icon,
+    images,
     languages,
     linkToDownload,
     name,
-    overview,
     os,
+    overview,
+    recommended,
     size,
     type,
     version,
@@ -225,7 +222,7 @@ function EditListing() {
     <>
       <header className="text-5xl sm:text-6xl font-extrabold text-center my-6">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Edit Listing
+          Ro'yxatni o'zgartirish
         </span>
       </header>
 
@@ -339,7 +336,7 @@ function EditListing() {
           </div>
 
           <label className="label">
-            <span className="label-text">Name</span>
+            <span className="label-text">Nomi</span>
           </label>
           <input
             type="text"
@@ -348,14 +345,14 @@ function EditListing() {
             value={name}
             onChange={onMutate}
             className="input"
-            placeholder="Application Name"
+            placeholder="Ilova nomi"
             required
           />
 
           <div className="grid grid-cols-3 grid-rows-2">
             <div className="pr-10">
               <label className="label">
-                <span className="label-text">Version</span>
+                <span className="label-text">Versiya</span>
               </label>
               <input
                 type="text"
@@ -364,19 +361,19 @@ function EditListing() {
                 onChange={onMutate}
                 id="version"
                 className="input w-full"
-                placeholder="Version"
+                placeholder="Ilova Versiyasi"
               />
             </div>
             <div className="pr-10">
               <label className="label">
-                <span className="label-text">Age Limit</span>
+                <span className="label-text">Yosh Chegarasi</span>
               </label>
               <input
                 type="number"
                 name="ageLimit"
                 id="ageLimit"
                 className="input w-full"
-                placeholder="Age Limit"
+                placeholder="Yosh Chegarasi"
                 value={ageLimit}
                 onChange={onMutate}
                 min="0"
@@ -385,7 +382,7 @@ function EditListing() {
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Operating System (OS)</span>
+                <span className="label-text">Operatsion Sistema (OS)</span>
               </label>
               <input
                 type="text"
@@ -406,10 +403,10 @@ function EditListing() {
                     : os.includes('MacOS')
                     ? 'CPU'
                     : os.includes('iOS')
-                    ? 'Required version iOS'
+                    ? "iOS'ning talab qilingan versiyasi"
                     : os.includes('Android')
-                    ? 'Required version Android'
-                    : 'Required version OS'}
+                    ? "iOS'ning talab qilingan versiyasi"
+                    : "OS'ning talab qilingan versiyasi"}
                 </span>
               </label>
               <input
@@ -435,7 +432,7 @@ function EditListing() {
             </div>
             <div className="pr-10">
               <label className="label">
-                <span className="label-text">Size</span>
+                <span className="label-text">O'lcham</span>
               </label>
               <input
                 type="text"
@@ -444,13 +441,13 @@ function EditListing() {
                 value={size}
                 onChange={onMutate}
                 className="input w-full"
-                placeholder="Show the full size with MB or GB"
+                placeholder="Umumiy o'lchamni MB yoki GB orqali ko'rsating"
                 required
               />
             </div>
             <div>
               <label className="label">
-                <span className="label-text">Link to download</span>
+                <span className="label-text">Yuklash uchun Link</span>
               </label>
               <input
                 type="text"
@@ -459,12 +456,12 @@ function EditListing() {
                 value={linkToDownload}
                 onChange={onMutate}
                 className="input w-full"
-                placeholder="Link to download"
+                placeholder="https://. . ."
               />
             </div>
           </div>
           <label className="label">
-            <span className="label-text">Languages</span>
+            <span className="label-text">Tillar</span>
           </label>
           <input
             type="text"
@@ -473,11 +470,11 @@ function EditListing() {
             value={languages}
             onChange={onMutate}
             className="input w-full"
-            placeholder="Languages"
+            placeholder="Ilovada mavjud tillar"
             required
           />
           <label className="label">
-            <span className="label-text">Overview</span>
+            <span className="label-text">Umumiy sharh</span>
           </label>
           <textarea
             className="textarea h-24"
@@ -488,7 +485,7 @@ function EditListing() {
             placeholder=". . ."
             required
           ></textarea>
-          <label className="label">Icon</label>
+          <label className="label">Ikonka (ilova belgisi)</label>
           <input
             className="formInputFile bg-base-100 rounded-xl p-2"
             type="file"
@@ -513,10 +510,12 @@ function EditListing() {
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
-              <label>Max 1 image for icon</label>
+              <label>
+                Ikonka uchun Max 1 surat (.png format tavsiya etiladi)
+              </label>
             </div>
           </div>
-          <label className="label">Images</label>
+          <label className="label">Suratlar</label>
 
           <input
             className="formInputFile bg-base-100 rounded-xl p-2"
@@ -543,11 +542,24 @@ function EditListing() {
                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
-              <label>The first image will be the cover (max 6)</label>
+              <label>Max 6 surat</label>
             </div>
           </div>
+          <div className="p-6 w-max mx-auto">
+            <label className="cursor-pointer label">
+              <span className="label-text">Asosiy sahifada tavsiya qilish</span>
+              <input
+                type="checkbox"
+                onChange={onMutate}
+                id="recommended"
+                checked={recommended ? 'checked' : ''}
+                value={recommended}
+                className="checkbox checkbox-primary ml-5"
+              />
+            </label>
+          </div>
           <button type="submit" className="btn btn-primary mt-10">
-            Create Listing
+            O'zgartirish
           </button>
         </form>
       </main>

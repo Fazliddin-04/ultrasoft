@@ -13,9 +13,9 @@ function ForgotPassword() {
     try {
       const auth = getAuth()
       await sendPasswordResetEmail(auth, email)
-      toast.success('Email was sent')
+      toast.success("Email jo'natildi")
     } catch (error) {
-      toast.error('Could not send reset email')
+      toast.error("Qayta tiklash xatini yuborib bo'lmadi")
     }
   }
 
@@ -23,7 +23,7 @@ function ForgotPassword() {
     <>
       <header className="text-5xl sm:text-6xl font-extrabold text-center my-6">
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Forgot Password
+          Parolni Tiklash
         </span>
       </header>
       <div className=" card bg-base-200 mx-auto p-5 w-11/12 sm:w-9/12 sm:p-10">
@@ -42,12 +42,12 @@ function ForgotPassword() {
           />
           <label className="label justify-end">
             <Link to="/sign-in" className="label-text-alt text-lg">
-              Sign in
+              Tizimga kirish
             </Link>
           </label>
 
           <button className="btn btn-block btn-primary mt-14">
-            Send Reset Link
+            Qayta tiklash xatini yuborish
           </button>
         </form>
       </div>
