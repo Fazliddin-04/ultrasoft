@@ -93,7 +93,7 @@ function Slider() {
               onClick={() => navigate(`/category/${data.type}/${id}`)}
               className="flex items-center justify-center"
             >
-              <ListingItem listing={data} id={id} bodyClasses="bg-neutral" />
+              <ListingItem listing={data} id={id} bodyClasses="bg-secondary" />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -101,18 +101,5 @@ function Slider() {
     )
   )
 }
-
-/* <div
-  style={{
-    background: `center / cover no-repeat url(${
-      data.imageUrls[data.imageUrls.length - 1]
-    })`,
-  }}
-  className="w-full h-full relative flex justify-end items-end "
->
-  <p className="text-5xl font-bold text-white backdrop-filter backdrop-blur-lg bg-white-20 mr-10 mb-10 w-90 p-4 shadow-2xl rounded-xl">
-    {data.overview}
-  </p>
-</div> */
 
 export default Slider
