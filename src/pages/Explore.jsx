@@ -113,14 +113,14 @@ function Explore() {
           </p>
           {listings.map(({ data, id }) => (
             <div
-              className="card card-compact lg:card-side w-full card-bordered mb-5 shadow-xl"
+              className="card card-compact xl:card-side w-full card-bordered mb-5 shadow-xl"
               key={id}
             >
               <figure className="explore-card-figure p-5 bg-gradient-to-br from-black via-base-100 to-transparent">
                 <img
                   src={data.iconUrl[0]}
                   alt={data.name}
-                  className="object-cover w-60"
+                  className="object-cover w-60 mx-auto"
                 />
               </figure>
               <div className="card-body">
@@ -160,16 +160,16 @@ function Explore() {
             </p>
           )}
         </div>
-        <div>
+        <div className="xl:w-1/4">
           <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4 text-center">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
               Tavsiya etiladi
             </span>
           </p>
-          {listings.map(
-            ({ data, id }) =>
-              data.recommended && (
-                <span key={id}>
+          <div className="flex flex-wrap justify-center gap-10">
+            {listings.map(
+              ({ data, id }) =>
+                data.recommended && (
                   <ListingItem
                     listing={data}
                     id={id}
@@ -177,10 +177,9 @@ function Explore() {
                     classes="image-full max-w-60"
                     bodyClasses="justify-end bg-dark-30 items-center max-w-60"
                   />
-                  <div className="mb-5"></div>
-                </span>
-              )
-          )}
+                )
+            )}
+          </div>
         </div>
       </main>
     </>
