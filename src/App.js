@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 import Explore from './pages/Explore'
 import Navbar from './components/layout/Navbar';
+import DrawerSide from './components/layout/DrawerSide';
 import Footer from './components/layout/Footer';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -22,27 +23,34 @@ function App() {
   return (
     <CategoryProvider>
       <Router>
-        <div className='flex flex-col items-center justify-between min-h-screen'>
-          <Navbar />
+        <div className="drawer">
+          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+          <div className="flex flex-col drawer-content">
+            <Navbar />
 
-          <main className='container mx-auto py-16'>
-            <Routes>
-              <Route path='/' element={<Explore />} />
-              <Route path='/:categoryType' element={<Category />} />
-              <Route path='/:categoryType/:categoryName' element={<SingleCategory />} />
-              <Route path='/:categoryType/:categoryName/:listingId' element={<Listing />} />
-              <Route path='/profile' element={<PrivateRoute />}>
-                <Route path='/profile' element={<Profile />} />
-              </Route>
-              <Route path='/sign-in' element={<SignIn />} />
-              <Route path='/sign-up' element={<SignUp />} />
-              <Route path='/forgot-password' element={<ForgotPassword />} />
-              <Route path='/create-listing' element={<CreateListing />} />
-              <Route path='/edit-listing/:listingId' element={<EditListing />} />
-            </Routes>
-          </main>
+            <main className='container mx-auto py-16'>
+              <Routes>
+                <Route path='/' element={<Explore />} />
+                <Route path='/:categoryType' element={<Category />} />
+                <Route path='/:categoryType/:categoryName' element={<SingleCategory />} />
+                <Route path='/:categoryType/:categoryName/:listingId' element={<Listing />} />
+                <Route path='/profile' element={<PrivateRoute />}>
+                  <Route path='/profile' element={<Profile />} />
+                </Route>
+                <Route path='/sign-in' element={<SignIn />} />
+                <Route path='/sign-up' element={<SignUp />} />
+                <Route path='/forgot-password' element={<ForgotPassword />} />
+                <Route path='/create-listing' element={<CreateListing />} />
+                <Route path='/edit-listing/:listingId' element={<EditListing />} />
+              </Routes>
+            </main>
 
-          <Footer />
+            <Footer />
+          </div>
+          <div className="drawer-side">
+            <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
+            <DrawerSide />
+          </div>
         </div>
       </Router>
 
