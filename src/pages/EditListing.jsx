@@ -20,6 +20,7 @@ function EditListing() {
 
   const [loading, setLoading] = useState(false)
   const [listing, setListing] = useState(null)
+  const [isRecommended, setIsRecommended] = useState(false)
   const [formData, setFormData] = useState({
     ageLimit: 0,
     category: '',
@@ -550,9 +551,9 @@ function EditListing() {
               <span className="label-text">Asosiy sahifada tavsiya qilish</span>
               <input
                 type="checkbox"
-                onChange={onMutate}
+                onChange={() => setIsRecommended((prevState) => !prevState)}
                 id="recommended"
-                checked={recommended ? 'checked' : ''}
+                checked={isRecommended ? 'checked' : ''}
                 value={recommended}
                 className="checkbox checkbox-primary ml-5"
               />
