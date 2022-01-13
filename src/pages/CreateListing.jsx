@@ -19,6 +19,7 @@ function CreateListing() {
     useContext(CategoryContext)
 
   const [loading, setLoading] = useState(false)
+  const [isRecommended, setIsRecommended] = useState(false)
   const [formData, setFormData] = useState({
     ageLimit: 0,
     category: '',
@@ -75,15 +76,6 @@ function CreateListing() {
   }, [isMounted])
 
   const onMutate = (e) => {
-    let isChecked = e.target.checked
-    let boolean = null
-
-    if (isChecked === true) {
-      boolean = true
-    } else if (isChecked === false) {
-      boolean = false
-    }
-
     // Files
     if (e.target.files) {
       setFormData((prevState) => ({
@@ -92,11 +84,11 @@ function CreateListing() {
       }))
     }
 
-    // text/numbers/boolean
+    // text/numbers
     if (!e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
-        [e.target.id]: boolean ?? e.target.value,
+        [e.target.id]: e.target.value,
       }))
     }
   }
@@ -507,9 +499,9 @@ function CreateListing() {
               <span className="label-text">Asosiy sahifada tavsiya qilish</span>
               <input
                 type="checkbox"
-                onChange={onMutate}
+                onChange={() => setIsRecommended((prevState) => !prevState)}
                 id="recommended"
-                checked={recommended ? 'checked' : ''}
+                checked={isRecommended ? 'checked' : ''}
                 value={recommended}
                 className="checkbox checkbox-primary ml-5"
               />
