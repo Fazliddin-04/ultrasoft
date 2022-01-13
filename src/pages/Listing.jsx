@@ -66,7 +66,7 @@ function Listing() {
   return (
     <>
       <div className="text-sm breadcrumbs">
-        <ul>
+        <ul className='flex flex-wrap'>
           <li>
             <Link to="/">Bosh sahifa</Link>
           </li>
@@ -94,8 +94,8 @@ function Listing() {
           <li>{listing.name}</li>
         </ul>
       </div>
-      <div className="flex flex-wrap items-center justify-center sm:justify-between my-5 w-4/5 mx-auto">
-        <div className="flex items-center">
+      <div className="flex flex-wrap gap-5 items-center justify-center sm:justify-between my-5 w-4/5 mx-auto">
+        <div className="flex flex-wrap items-center">
           <span className="h-40 w-40 bg-base-300 mask mask-squircle flex items-center mr-5">
             <img src={listing.iconUrl[0]} alt="icon" className="object-cover" />
           </span>
@@ -116,7 +116,7 @@ function Listing() {
             </div>
           </div>
         </div>
-        <div>
+        <div className="ml-auto">
           <a
             href={listing.linkToDownload}
             className="btn btn-wide btn-lg btn-animate"
