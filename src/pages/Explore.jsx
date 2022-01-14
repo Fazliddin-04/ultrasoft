@@ -174,8 +174,9 @@ function Explore() {
                     listing={data}
                     id={id}
                     key={id}
-                    classes="image-full max-w-60"
+                    classes="image-full w-60 sm:w-72"
                     bodyClasses="justify-end bg-dark-30 items-center max-w-60"
+                    cardFigureClass="h-60"
                   />
                 )
             )}
