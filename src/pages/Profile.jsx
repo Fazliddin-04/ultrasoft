@@ -64,13 +64,13 @@ function Profile() {
   }
 
   const onDelete = async (listingId) => {
-    if (window.confirm('Are you sure you want to delete?')) {
+    if (window.confirm("O'chirishni xohlaganingizga ishonchingiz komilmi?")) {
       await deleteDoc(doc(db, 'listings', listingId))
       const updatedListings = listings.filter(
         (listing) => listing.id !== listingId
       )
       setListings(updatedListings)
-      toast.success('Successfully deleted listing')
+      toast.success("Ro'yxat muvaffaqiyatli o'chirildi")
     }
   }
 
@@ -89,7 +89,7 @@ function Profile() {
         await updateDoc(userRef, { name })
       }
     } catch (error) {
-      toast.error('Could not update profile details')
+      toast.error("Shaxsiy ma'lumotlarni o'zgartirib bo'lmadi")
     }
   }
 
