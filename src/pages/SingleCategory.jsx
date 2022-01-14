@@ -103,7 +103,7 @@ function SingleCategory() {
     <div className="m-10">
       <header className="bg-base-300 p-4 rounded-xl">
         <p className="text-3xl font-bold tracking-wide">
-          {params.categoryName.toUpperCase().replace('-', ' ')}
+          {params.categoryName.toUpperCase().replace(/-/g, ' ')}
         </p>
       </header>
 
@@ -118,7 +118,7 @@ function SingleCategory() {
                   listing={listing.data}
                   id={listing.id}
                   key={listing.id}
-                  bodyClasses="bg-neutral"
+                  bodyClasses="bg-base-300"
                 />
               ))}
             </ul>
@@ -137,8 +137,8 @@ function SingleCategory() {
         </>
       ) : (
         <p className="text-center mx-auto my-10 w-max">
-          {params.categoryName.toUpperCase().replace('-', ' ')} uchun ro'yxatlar
-          yo'q
+          {params.categoryName.toUpperCase().replace(/-/g, ' ')} uchun
+          ro'yxatlar yo'q
         </p>
       )}
     </div>
