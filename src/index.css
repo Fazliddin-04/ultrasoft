@@ -93,6 +93,9 @@
 
 .card figure > img {
   max-width: 15rem !important;
+  object-fit: cover;
+  max-height: 100%;
+  margin: 0 auto;
 }
 
 .card figure.explore-card-figure > img {
