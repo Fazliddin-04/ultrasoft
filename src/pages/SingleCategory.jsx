@@ -112,13 +112,15 @@ function SingleCategory() {
       ) : listings && listings.length > 0 ? (
         <>
           <main className="my-10">
-            <ul className="p-0 grid gap-10 sm:grid-cols-2  lg:grid-cols-4 xl:grid-cols-6 ">
+            <ul className="p-0 grid gap-10sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {listings.map((listing) => (
                 <ListingItem
                   listing={listing.data}
                   id={listing.id}
                   key={listing.id}
-                  bodyClasses="bg-base-300"
+                  classes="w-60 md:w-72 card-compact lg:card-normal"
+                  bodyClasses="bg-base-200 h-48"
+                  cardFigureClass="h-60 pt-2"
                 />
               ))}
             </ul>
