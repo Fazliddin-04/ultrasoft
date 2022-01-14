@@ -43,12 +43,23 @@ export const CategoryProvider = ({ children }) => {
     'Sport',
   ])
 
+  // eslint-disable-next-line
+  const [windowsCategory, setWindowsCategory] = useState([
+    'Windows-7',
+    'Windows-8',
+    'Windows-10',
+    'Windows-11',
+  ])
+
+
+
   return (
     <CategoryContext.Provider
       value={{
         gamesCategory,
         mobileCategory,
-        softwareCategory
+        softwareCategory,
+        windowsCategory,
       }}
     >
       {children}
