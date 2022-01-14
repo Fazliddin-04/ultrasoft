@@ -15,7 +15,7 @@ import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
 function CreateListing() {
-  const { gamesCategory, mobileCategory, softwareCategory } =
+  const { gamesCategory, mobileCategory, softwareCategory, windowsCategory } =
     useContext(CategoryContext)
 
   const [loading, setLoading] = useState(false)
@@ -245,6 +245,16 @@ function CreateListing() {
               onClick={onMutate}
               required
             />
+            <input
+              type="radio"
+              name="type"
+              value="windows-os"
+              id="type"
+              data-title="windows os"
+              className="btn"
+              onClick={onMutate}
+              required
+            />
           </div>
 
           <div className="btn-group mx-auto my-5 justify-center">
@@ -286,6 +296,20 @@ function CreateListing() {
                   data-title={category}
                   className="btn"
                   key={mobileCategory.indexOf(category)}
+                  onClick={onMutate}
+                  required
+                />
+              ))
+            ) : type === 'windows-os' ? (
+              windowsCategory.map((category) => (
+                <input
+                  type="radio"
+                  name="category"
+                  value={category.toLowerCase()}
+                  id="category"
+                  data-title={category.replace('-', ' ')}
+                  className="btn"
+                  key={windowsCategory.indexOf(category)}
                   onClick={onMutate}
                   required
                 />
