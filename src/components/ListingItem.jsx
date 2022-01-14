@@ -10,7 +10,7 @@ function ListingItem({
   cardFigureClass,
 }) {
   return (
-    <li className="indicator">
+    <li className="indicator mx-auto">
       <Link
         to={`/${listing.type}/${listing.category}/${id}`}
         className={`card card-bordered ${
@@ -21,7 +21,7 @@ function ListingItem({
           className={`${
             cardFigureClass
               ? cardFigureClass
-              : 'flex items-center justify-center p-2'
+              : 'flex items-center justify-center'
           }`}
         >
           <img src={listing.iconUrl[0]} alt={listing.name} />
@@ -37,7 +37,7 @@ function ListingItem({
           {/* Vote Average */}
           <div className="card-actions">
             <div className="badge badge-primary capitalize">
-              {listing.category}
+              {listing.category.replace(/-/g, ' ')}
             </div>
           </div>
         </div>
