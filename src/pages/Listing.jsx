@@ -101,7 +101,7 @@ function Listing() {
         </ul>
       </div>
       <div className="flex flex-wrap gap-5 items-center justify-center sm:justify-between my-5 w-4/5 mx-auto">
-        <div className="flex flex-wrap items-center">
+        <div className="flex flex-wrap lg:flex-nowrap items-center">
           <span className="h-40 w-40 bg-base-300 mask mask-squircle flex items-center mr-5">
             <img src={listing.iconUrl[0]} alt="icon" className="object-cover" />
           </span>
