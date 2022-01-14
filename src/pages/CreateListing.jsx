@@ -19,7 +19,6 @@ function CreateListing() {
     useContext(CategoryContext)
 
   const [loading, setLoading] = useState(false)
-  const [isRecommended, setIsRecommended] = useState(false)
   const [formData, setFormData] = useState({
     ageLimit: 0,
     category: '',
@@ -76,6 +75,14 @@ function CreateListing() {
   }, [isMounted])
 
   const onMutate = (e) => {
+    let boolean = null
+
+    if (e.target.value === 'true') {
+      boolean = true
+    }
+    if (e.target.value === 'false') {
+      boolean = false
+    }
     // Files
     if (e.target.files) {
       setFormData((prevState) => ({
@@ -88,7 +95,7 @@ function CreateListing() {
     if (!e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
-        [e.target.id]: e.target.value,
+        [e.target.id]: boolean ?? e.target.value,
       }))
     }
   }
@@ -179,7 +186,7 @@ function CreateListing() {
 
     const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
     setLoading(false)
-    toast.success('Listing saved')
+    toast.success("Ro'yxat saqlandi")
     navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   }
 
@@ -206,6 +213,7 @@ function CreateListing() {
               data-title="kompyuter ilova"
               className="btn"
               onClick={onMutate}
+              required
             />
             <input
               type="radio"
@@ -215,6 +223,7 @@ function CreateListing() {
               data-title="mobil ilova"
               className="btn"
               onClick={onMutate}
+              required
             />
             <input
               type="radio"
@@ -224,6 +233,7 @@ function CreateListing() {
               data-title="kompyuter o'yin"
               className="btn"
               onClick={onMutate}
+              required
             />
             <input
               type="radio"
@@ -233,6 +243,7 @@ function CreateListing() {
               data-title="mobil o'yin"
               className="btn"
               onClick={onMutate}
+              required
             />
           </div>
 
@@ -311,6 +322,7 @@ function CreateListing() {
                 id="version"
                 className="input w-full"
                 placeholder="Ilova Versiyasi"
+                required
               />
             </div>
             <div className="pr-10">
@@ -327,6 +339,7 @@ function CreateListing() {
                 onChange={onMutate}
                 min="0"
                 max="100"
+                required
               />{' '}
             </div>
             <div>
@@ -406,6 +419,7 @@ function CreateListing() {
                 onChange={onMutate}
                 className="input w-full"
                 placeholder="https://. . ."
+                required
               />
             </div>
           </div>
@@ -495,17 +509,33 @@ function CreateListing() {
             </div>
           </div>
           <div className="p-6 w-max mx-auto">
-            <label className="cursor-pointer label">
-              <span className="label-text">Asosiy sahifada tavsiya qilish</span>
-              <input
-                type="checkbox"
-                onChange={() => setIsRecommended((prevState) => !prevState)}
-                id="recommended"
-                checked={isRecommended ? 'checked' : ''}
-                value={recommended}
-                className="checkbox checkbox-primary ml-5"
-              />
+            <label className="formLabel">
+              Tavsiya etiladimi? (rekomendatsiya)
             </label>
+            <div className="btn-group w-max mt-5 mx-auto">
+              <button
+                className={recommended ? 'btn btn-active' : 'btn'}
+                type="button"
+                id="recommended"
+                value={true}
+                onClick={onMutate}
+              >
+                Ha
+              </button>
+              <button
+                className={
+                  !recommended && recommended !== null
+                    ? 'btn btn-active'
+                    : 'btn'
+                }
+                type="button"
+                id="recommended"
+                value={false}
+                onClick={onMutate}
+              >
+                Yo'q
+              </button>
+            </div>
           </div>
           <button type="submit" className="btn btn-primary mt-10">
             Yaratish
