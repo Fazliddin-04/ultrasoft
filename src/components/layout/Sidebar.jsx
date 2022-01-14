@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import CategoryContext from '../../context/CategoryContext'
 
 function Sidebar() {
-  const { gamesCategory, mobileCategory, softwareCategory } =
+  const { gamesCategory, mobileCategory, softwareCategory, windowsCategory } =
     useContext(CategoryContext)
 
   return (
@@ -47,6 +47,27 @@ function Sidebar() {
             {gamesCategory.map((category) => (
               <li key={gamesCategory.indexOf(category)}>
                 <Link to={`/software-games/${category.toLowerCase()}`}>
+                  {category.replace(/-/g, ' ')}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="collapse w-80 border border-base-300 collapse-arrow">
+        <input type="checkbox" />
+        <div className="collapse-title text-xl font-medium">Windows OS</div>
+        <div className="collapse-content">
+          <ul className="menu py-3 shadow-lg bg-base-100 rounded-box">
+            <li className="menu-title">
+              <span>Operatsion Sistemalar</span>
+            </li>
+            <li>
+              <Link to="/windows-os">Hammasi</Link>
+            </li>
+            {windowsCategory.map((category) => (
+              <li key={windowsCategory.indexOf(category)}>
+                <Link to={`/windows-os/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
