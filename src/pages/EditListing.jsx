@@ -20,7 +20,6 @@ function EditListing() {
 
   const [loading, setLoading] = useState(false)
   const [listing, setListing] = useState(null)
-  const [isRecommended, setIsRecommended] = useState(false)
   const [formData, setFormData] = useState({
     ageLimit: 0,
     category: '',
@@ -72,7 +71,7 @@ function EditListing() {
         setLoading(false)
       } else {
         navigate('/')
-        toast.error('Listing does not exist')
+        toast.error("Ro'yxat aniqlanmadi")
       }
     }
 
@@ -82,7 +81,7 @@ function EditListing() {
   // Redirect if listing isn't user's
   useEffect(() => {
     if (listing && listing.userRef !== auth.currentUser.uid) {
-      toast.error('You can not edit that listing')
+      toast.error("Siz bu ro'yxatni o'zgartirolmaysiz!")
       navigate('/')
     }
   })
@@ -106,6 +105,14 @@ function EditListing() {
   }, [isMounted])
 
   const onMutate = (e) => {
+    let boolean = null
+
+    if (e.target.value === 'true') {
+      boolean = true
+    }
+    if (e.target.value === 'false') {
+      boolean = false
+    }
     // Files
     if (e.target.files) {
       setFormData((prevState) => ({
@@ -118,7 +125,7 @@ function EditListing() {
     if (!e.target.files) {
       setFormData((prevState) => ({
         ...prevState,
-        [e.target.id]: e.target.value,
+        [e.target.id]: boolean ?? e.target.value,
       }))
     }
   }
@@ -130,13 +137,13 @@ function EditListing() {
 
     if (images.length > 6) {
       setLoading(false)
-      toast.error('Max 6 images')
+      toast.error("Max 6 sur'at")
       return
     }
 
     if (icon.length > 1) {
       setLoading(false)
-      toast.error('Max 1 icon')
+      toast.error('Max 1 ikonka')
       return
     }
 
@@ -185,7 +192,7 @@ function EditListing() {
       [...images].map((image) => storeImage(image))
     ).catch(() => {
       setLoading(false)
-      toast.error('Images not uploaded')
+      toast.error('Suratlar yuklanmadi')
       return
     })
 
@@ -193,7 +200,7 @@ function EditListing() {
       [...icon].map((image) => storeImage(image))
     ).catch(() => {
       setLoading(false)
-      toast.error('Icon not uploaded')
+      toast.error('Ikonka yuklanmadi')
       return
     })
 
@@ -211,7 +218,7 @@ function EditListing() {
     const docRef = doc(db, 'listings', params.listingId)
     await updateDoc(docRef, formDataCopy)
     setLoading(false)
-    toast.success('Listing saved')
+    toast.success("Ro'yxat saqlandi")
     navigate(`/category/${formDataCopy.type}/${docRef.id}`)
   }
 
@@ -240,6 +247,7 @@ function EditListing() {
                 'software-apps' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
+              required
             />
             <input
               type="radio"
@@ -251,6 +259,7 @@ function EditListing() {
                 'mobile-apps' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
+              required
             />
             <input
               type="radio"
@@ -262,6 +271,7 @@ function EditListing() {
                 'software-games' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
+              required
             />
             <input
               type="radio"
@@ -273,6 +283,7 @@ function EditListing() {
                 'mobile-games' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
+              required
             />
           </div>
 
@@ -363,6 +374,7 @@ function EditListing() {
                 id="version"
                 className="input w-full"
                 placeholder="Ilova Versiyasi"
+                required
               />
             </div>
             <div className="pr-10">
@@ -379,6 +391,7 @@ function EditListing() {
                 onChange={onMutate}
                 min="0"
                 max="100"
+                required
               />{' '}
             </div>
             <div>
@@ -458,6 +471,7 @@ function EditListing() {
                 onChange={onMutate}
                 className="input w-full"
                 placeholder="https://. . ."
+                required
               />
             </div>
           </div>
@@ -547,17 +561,33 @@ function EditListing() {
             </div>
           </div>
           <div className="p-6 w-max mx-auto">
-            <label className="cursor-pointer label">
-              <span className="label-text">Asosiy sahifada tavsiya qilish</span>
-              <input
-                type="checkbox"
-                onChange={() => setIsRecommended((prevState) => !prevState)}
-                id="recommended"
-                checked={isRecommended ? 'checked' : ''}
-                value={recommended}
-                className="checkbox checkbox-primary ml-5"
-              />
+            <label className="formLabel">
+              Tavsiya etiladimi? (rekomendatsiya)
             </label>
+            <div className="btn-group w-max mt-5 mx-auto">
+              <button
+                className={recommended ? 'btn btn-active' : 'btn'}
+                type="button"
+                id="recommended"
+                value={true}
+                onClick={onMutate}
+              >
+                Ha
+              </button>
+              <button
+                className={
+                  !recommended && recommended !== null
+                    ? 'btn btn-active'
+                    : 'btn'
+                }
+                type="button"
+                id="recommended"
+                value={false}
+                onClick={onMutate}
+              >
+                Yo'q
+              </button>
+            </div>
           </div>
           <button type="submit" className="btn btn-primary mt-10">
             O'zgartirish
