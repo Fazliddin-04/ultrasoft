@@ -5,10 +5,16 @@ import { getDoc, doc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
 
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Zoom,
+} from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
+SwiperCore.use([Zoom, Navigation, Pagination, Scrollbar, A11y])
 
 function Listing() {
   const [listing, setListing] = useState(null)
@@ -66,7 +72,7 @@ function Listing() {
   return (
     <>
       <div className="text-sm breadcrumbs">
-        <ul className='flex flex-wrap'>
+        <ul className="flex flex-wrap">
           <li>
             <Link to="/">Bosh sahifa</Link>
           </li>
@@ -128,27 +134,82 @@ function Listing() {
             <span></span>
             Yuklab olish
           </a>
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex="0"
+              className="btn btn-circle btn-ghost btn-xs text-info"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="inline w-5 h-5 stroke-current"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <div
+              tabIndex="0"
+              className="shadow card compact dropdown-content bg-base-100 rounded-box w-52"
+            >
+              <div className="card-body">
+                <h2 className="card-title">
+                  Yuklab olish uchun linklar xavfsiz sahifada!
+                </h2>
+                <p>
+                  Ba'zi bir sabablarga ko'ra, vaqtinchalik shu holatda
+                  foydalanib turishingizni iltimos qilamiz. Nosozliklar uchun
+                  uzr so'raymiz
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="bg-base-300 rounded-xl py-10 my-10 listing-slide-container">
+      <div className="bg-base-300 rounded-t-xl py-10 mt-10 listing-slide-container">
         <Swiper
           slidesPerView={1}
+          zoom={true}
           navigation={true}
           pagination={{ clickable: true }}
           className="w-5/6 "
           loop={true}
+          style={{
+            '--swiper-navigation-color': '#fff',
+            '--swiper-pagination-color': '#fff',
+          }}
         >
           {listing.imageUrls.map((url, index) => (
             <SwiperSlide key={index}>
-              <div
-                style={{
-                  background: `center / contain no-repeat url(${url})`,
-                }}
-                className="h-full w-full relative"
-              ></div>
+              <div className="swiper-zoom-container h-full w-full relative">
+                <img src={`${url}`} alt="pic" />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
+      </div>
+      <div className="alert alert-info mb-10 rounded-t-none">
+        <div className="flex-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="w-6 h-6 mx-2 stroke-current"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <label>Yaqinlashtirish uchun, rasm ustiga 2 marta bosing</label>
+        </div>
       </div>
       <div className="flex justify-around my-5">
         <div>
