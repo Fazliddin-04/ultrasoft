@@ -23,23 +23,7 @@ function Sidebar() {
             </li>
             {softwareCategory.map((category) => (
               <li key={softwareCategory.indexOf(category)}>
-                <Link
-                  to={`/software-apps/${
-                    category.toLowerCase() === 'brauzerlar'
-                      ? 'browsers'
-                      : category.toLowerCase() === 'emulatorlar'
-                      ? 'emulators'
-                      : category.toLowerCase() === 'aloqa'
-                      ? 'communication'
-                      : category.toLowerCase() === "ta'lim"
-                      ? 'education'
-                      : category.toLowerCase() === 'grafik-tahrirchilar'
-                      ? 'graphic-editors'
-                      : category.toLowerCase() === 'matn-tahrirchilar'
-                      ? 'text-editors'
-                      : category.toLowerCase()
-                  }`}
-                >
+                <Link to={`/software-apps/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
@@ -62,33 +46,7 @@ function Sidebar() {
             </li>
             {gamesCategory.map((category) => (
               <li key={gamesCategory.indexOf(category)}>
-                <Link
-                  to={`/software-games/${
-                    category.toLowerCase() === 'sarguzasht'
-                      ? 'adventure'
-                      : category.toLowerCase() === 'arkada'
-                      ? 'arcade'
-                      : category.toLowerCase() === 'taxta'
-                      ? 'board'
-                      : category.toLowerCase() === 'karta'
-                      ? 'card'
-                      : category.toLowerCase() === 'tasodifiy'
-                      ? 'cusual'
-                      : category.toLowerCase() === "ta'limiy"
-                      ? 'educational'
-                      : category.toLowerCase() === 'boshqotirma'
-                      ? 'puzzle'
-                      : category.toLowerCase() === 'poyga'
-                      ? 'racing'
-                      : category.toLowerCase() === 'simulyator'
-                      ? 'simulator'
-                      : category.toLowerCase() === 'strategiya'
-                      ? 'simulator'
-                      : category.toLowerCase() === 'sport'
-                      ? 'sports'
-                      : category.toLowerCase()
-                  }`}
-                >
+                <Link to={`/software-games/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
@@ -109,23 +67,7 @@ function Sidebar() {
             </li>
             {mobileCategory.map((category) => (
               <li key={mobileCategory.indexOf(category)}>
-                <Link
-                  to={`/mobile-apps/${
-                    category.toLowerCase() === "san'at-&-dizayn"
-                      ? 'art-&-design'
-                      : category.toLowerCase() === "kitob-&-ma'lumot"
-                      ? 'books-&-reference'
-                      : category.toLowerCase() === 'aloqa'
-                      ? 'communication'
-                      : category.toLowerCase() === "ta'lim"
-                      ? 'education'
-                      : category.toLowerCase() === 'grafik-tahrirchilar'
-                      ? 'graphic-editors'
-                      : category.toLowerCase() === 'matn-tahrirchilar'
-                      ? 'text-editors'
-                      : category.toLowerCase()
-                  }`}
-                >
+                <Link to={`/mobile-apps/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
@@ -146,33 +88,7 @@ function Sidebar() {
             </li>
             {gamesCategory.map((category) => (
               <li key={gamesCategory.indexOf(category)}>
-                <Link
-                  to={`/mobile-games/${
-                    category.toLowerCase() === 'sarguzasht'
-                      ? 'adventure'
-                      : category.toLowerCase() === 'arkada'
-                      ? 'arcade'
-                      : category.toLowerCase() === 'taxta'
-                      ? 'board'
-                      : category.toLowerCase() === 'karta'
-                      ? 'card'
-                      : category.toLowerCase() === 'tasodifiy'
-                      ? 'cusual'
-                      : category.toLowerCase() === "ta'limiy"
-                      ? 'educational'
-                      : category.toLowerCase() === 'boshqotirma'
-                      ? 'puzzle'
-                      : category.toLowerCase() === 'poyga'
-                      ? 'racing'
-                      : category.toLowerCase() === 'simulyator'
-                      ? 'simulator'
-                      : category.toLowerCase() === 'strategiya'
-                      ? 'simulator'
-                      : category.toLowerCase() === 'sport'
-                      ? 'sports'
-                      : category.toLowerCase()
-                  }`}
-                >
+                <Link to={`/mobile-games/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
