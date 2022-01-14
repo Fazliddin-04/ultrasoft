@@ -74,7 +74,7 @@ function Slider() {
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 30,
             },
             1024: {
@@ -93,7 +93,13 @@ function Slider() {
               onClick={() => navigate(`/category/${data.type}/${id}`)}
               className="flex items-center justify-center"
             >
-              <ListingItem listing={data} id={id} bodyClasses="bg-base-200" />
+              <ListingItem
+                listing={data}
+                id={id}
+                classes="w-60 sm:w-72 h-full card-compact lg:card-normal"
+                bodyClasses="bg-base-200 h-48"
+                cardFigureClass="h-60 pt-2"
+              />
             </SwiperSlide>
           ))}
         </Swiper>
