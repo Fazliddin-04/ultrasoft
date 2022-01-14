@@ -15,7 +15,7 @@ import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
 function EditListing() {
-  const { gamesCategory, mobileCategory, softwareCategory } =
+  const { gamesCategory, mobileCategory, softwareCategory, windowsCategory } =
     useContext(CategoryContext)
 
   const [loading, setLoading] = useState(false)
@@ -285,6 +285,18 @@ function EditListing() {
               onClick={onMutate}
               required
             />
+            <input
+              type="radio"
+              name="type"
+              value="windows-os"
+              id="type"
+              data-title="windows os"
+              className={`btn ${
+                'windows-os' === formData.type ? 'btn-active' : ''
+              }`}
+              onClick={onMutate}
+              required
+            />
           </div>
 
           <div className="btn-group mx-auto my-5 justify-center">
@@ -338,6 +350,24 @@ function EditListing() {
                       : ''
                   }`}
                   key={mobileCategory.indexOf(category)}
+                  onClick={onMutate}
+                  required
+                />
+              ))
+            ) : type === 'windows-os' ? (
+              windowsCategory.map((category) => (
+                <input
+                  type="radio"
+                  name="category"
+                  value={category.toLowerCase()}
+                  id="category"
+                  data-title={category.replace('-', ' ')}
+                  className={`btn ${
+                    category.toLowerCase() === formData.category
+                      ? 'btn-active'
+                      : ''
+                  }`}
+                  key={windowsCategory.indexOf(category)}
                   onClick={onMutate}
                   required
                 />
