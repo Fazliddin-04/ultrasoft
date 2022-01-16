@@ -97,19 +97,15 @@ function Explore() {
     <>
       <Slider />
       <main className="flex items-stretch justify-around flex-wrap mt-10">
-        <div>
+        <div className="mb-14">
           <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-              Kategoriyalar
-            </span>
+            <span className="text-accent">Kategoriyalar</span>
           </p>
           <Sidebar />
         </div>
-        <div className="flex-1 flex flex-col items-center px-4">
+        <div className="flex-1 flex flex-col items-center px-4 mb-14">
           <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-              Eng so'ngilari
-            </span>
+            <span className="text-accent">Eng so'ngilari</span>
           </p>
           {listings.map(({ data, id }) => (
             <div
@@ -123,7 +119,7 @@ function Explore() {
                   className="object-cover w-60 mx-auto"
                 />
               </figure>
-              <div className="card-body">
+              <div className="card-body justify-center">
                 <h2 className="card-title">
                   {data.name}
                   {new Date(data.timestamp.seconds * 1000).getDate() >=
@@ -131,7 +127,11 @@ function Explore() {
                     <div className="badge mx-2 uppercase">yangi</div>
                   )}
                 </h2>
-                <p>{data.overview}</p>
+                <p>
+                  {data.overview.length > 130
+                    ? data.overview.slice(0, 130) + '...'
+                    : data.overview}
+                </p>
                 <div className="card-actions">
                   <a
                     href={data.linkToDownload}
@@ -162,9 +162,7 @@ function Explore() {
         </div>
         <div className="xl:w-1/4">
           <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-              Tavsiya etiladi
-            </span>
+            <span className="text-accent">Tavsiya etiladi</span>
           </p>
           <div className="flex flex-wrap justify-center gap-10">
             {listings.map(
