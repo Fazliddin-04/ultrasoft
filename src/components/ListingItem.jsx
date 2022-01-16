@@ -28,7 +28,9 @@ function ListingItem({
         </figure>
         <div className={`card-body ${bodyClasses}`}>
           <h2 className="card-title">
-            {listing.name}
+            {listing.name.length > 30
+              ? listing.name.slice(0, 30) + '...'
+              : listing.name}
             {new Date(listing.timestamp.seconds * 1000).getDate() ===
               new Date().getDate() && (
               <div className="badge mx-2 badge-secondary uppercase">yangi</div>
