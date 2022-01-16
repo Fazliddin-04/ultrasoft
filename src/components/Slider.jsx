@@ -52,7 +52,7 @@ function Slider() {
     listings && (
       <div className="bg-base-300 pb-8 rounded-b-xl">
         <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
+          <span className="text-accent">
             Ommabop materiallar
           </span>
         </p>
