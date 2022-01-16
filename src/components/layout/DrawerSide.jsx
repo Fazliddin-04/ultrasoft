@@ -58,7 +58,7 @@ function DrawerSide({ title }) {
 
   themeChange()
   return (
-    <ul className="p-4 overflow-y-auto menu w-80 bg-base-100">
+    <ul className="p-4 overflow-y-auto menu w-80 bg-neutral">
       <div className="w-max p-2 mx-auto mb-2">
         <Link
           to="/"
