@@ -143,7 +143,6 @@ function Listing() {
           <a
             href={listing.linkToDownload}
             className="btn btn-wide btn-lg btn-animate"
-            download={`${listing.name}_${listing.version}.exe`}
           >
             <span></span>
             <span></span>
