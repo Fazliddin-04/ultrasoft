@@ -136,6 +136,7 @@ function Explore() {
                   <a
                     href={data.linkToDownload}
                     className="btn btn-primary"
+                    target="_blank" rel="noreferrer
                   >
                     Yuklab olish
                   </a>
