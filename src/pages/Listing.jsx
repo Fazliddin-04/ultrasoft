@@ -143,6 +143,7 @@ function Listing() {
           <a
             href={listing.linkToDownload}
             className="btn btn-wide btn-lg btn-animate"
+            target="_blank" rel="noreferrer"
           >
             <span></span>
             <span></span>
