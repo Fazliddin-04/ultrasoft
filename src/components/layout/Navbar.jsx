@@ -126,7 +126,7 @@ function Navbar({ title }) {
               className="btn btn-primary"
               onClick={() => navigate('/profile')}
             >
-              shaxsiy Hisob
+              Profil
             </button>
           </li>
         </ul>
