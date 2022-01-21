@@ -105,7 +105,7 @@ function DrawerSide({ title }) {
           className="btn btn-primary"
           onClick={() => navigate('/profile')}
         >
-          shaxsiy Hisob
+          Profil
         </button>
       </li>
     </ul>
@@ -113,7 +113,7 @@ function DrawerSide({ title }) {
 }
 
 DrawerSide.defaultProps = {
-  title: 'Ultrasoft.uz',
+  title: 'Ultrasoft',
 }
 
 DrawerSide.propTypes = {
