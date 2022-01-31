@@ -176,124 +176,278 @@
 }
 
 .btn-animate {
+  border: none;
+  padding: 20px 40px;
+  font-weight: bold;
   position: relative;
-  display: inline-block;
-  padding: 25px 30px;
-  color: hsla(var(--s) / var(--tw-bg-opacity, 1));
-  text-decoration: none;
+  background: transparent;
+  color: hsla(var(--a) / var(--tw-bg-opacity, 1));
   text-transform: uppercase;
-  transition: 0.5s;
-  letter-spacing: 4px;
+  border: 3px solid hsla(var(--a) / var(--tw-bg-opacity, 1));
+  cursor: pointer;
+  transition: all 0.7s;
   overflow: hidden;
-  background: white;
-}
-
-.btn-animate:hover {
-  background: hsla(var(--s) / var(--tw-bg-opacity, 1));
-  color: #f3f3f3;
-  box-shadow: 0 0 5px hsla(var(--s) / var(--tw-bg-opacity, 1)),
-    0 0 25px hsla(var(--s) / var(--tw-bg-opacity, 1)),
-    0 0 50px hsla(var(--s) / var(--tw-bg-opacity, 1)),
-    0 0 200px hsla(var(--s) / var(--tw-bg-opacity, 1));
-  -webkit-box-reflect: below 1px linear-gradient(transparent, #ffffff55);
 }
 
 .btn-animate span {
-  position: absolute;
-  display: block;
+  transition: all 0.7s;
+  z-index: -1;
 }
 
-.btn-animate span:nth-child(1) {
+.btn-animate .first {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 25%;
+  height: 100%;
+  background: hsla(var(--a) / var(--tw-bg-opacity, 1));
+}
+
+.btn-animate:hover .first {
+  top: 0;
+  right: 0;
+}
+.btn-animate .second {
+  content: '';
+  position: absolute;
+  left: 25%;
+  top: -100%;
+  height: 100%;
+  width: 25%;
+  background: hsla(var(--a) / var(--tw-bg-opacity, 1));
+}
+
+.btn-animate:hover .second {
+  top: 0;
+  left: 50%;
+}
+
+.btn-animate .third {
+  content: '';
+  position: absolute;
+  left: 50%;
+  height: 100%;
+  top: 100%;
+  width: 25%;
+  background: hsla(var(--a) / var(--tw-bg-opacity, 1));
+}
+
+.btn-animate:hover .third {
+  top: 0;
+  left: 25%;
+}
+
+.btn-animate .fourth {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 0;
+  height: 100%;
+  width: 25%;
+  background: hsla(var(--a) / var(--tw-bg-opacity, 1));
+}
+
+.btn-animate:hover .fourth {
   top: 0;
   left: 0;
-  width: 100%;
-  height: 10px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    hsla(var(--s) / var(--tw-bg-opacity, 1))
-  );
-  animation: animate1 1s linear infinite;
-}
-@keyframes animate1 {
-  0% {
-    left: -100%;
-  }
-  50%,
-  100% {
-    left: 100%;
-  }
-}
-
-.btn-animate span:nth-child(2) {
-  top: -100%;
-  right: 0;
-  width: 10px;
-  height: 100%;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    hsla(var(--s) / var(--tw-bg-opacity, 1))
-  );
-  animation: animate2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-@keyframes animate2 {
-  0% {
-    top: -100%;
-  }
-  50%,
-  100% {
-    top: 100%;
-  }
-}
-
-.btn-animate span:nth-child(3) {
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 10px;
-  background: linear-gradient(
-    270deg,
-    transparent,
-    hsla(var(--s) / var(--tw-bg-opacity, 1))
-  );
-  animation: animate3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-@keyframes animate3 {
-  0% {
-    right: -100%;
-  }
-  50%,
-  100% {
-    right: 100%;
-  }
-}
-
-.btn-animate span:nth-child(4) {
-  bottom: -100%;
-  left: 0;
-  width: 10px;
-  height: 100%;
-  background: linear-gradient(
-    360deg,
-    transparent,
-    hsla(var(--s) / var(--tw-bg-opacity, 1))
-  );
-  animation: animate4 1s linear infinite;
-  animation-delay: 0.75s;
-}
-@keyframes animate4 {
-  0% {
-    bottom: -100%;
-  }
-  50%,
-  100% {
-    bottom: 100%;
-  }
 }
 
 option {
   background-color: hsla(var(--s) / var(--tw-bg-opacity, 1));
+}
+
+.glitch {
+  position: relative;
+}
+@keyframes noise-anim {
+  0% {
+    clip: rect(30px, 9999px, 49px, 0);
+  }
+  5% {
+    clip: rect(62px, 9999px, 6px, 0);
+  }
+  10% {
+    clip: rect(46px, 9999px, 36px, 0);
+  }
+  15% {
+    clip: rect(53px, 9999px, 24px, 0);
+  }
+  20% {
+    clip: rect(84px, 9999px, 87px, 0);
+  }
+  25% {
+    clip: rect(93px, 9999px, 43px, 0);
+  }
+  30% {
+    clip: rect(92px, 9999px, 42px, 0);
+  }
+  35% {
+    clip: rect(26px, 9999px, 81px, 0);
+  }
+  40% {
+    clip: rect(11px, 9999px, 65px, 0);
+  }
+  45% {
+    clip: rect(4px, 9999px, 88px, 0);
+  }
+  50% {
+    clip: rect(65px, 9999px, 63px, 0);
+  }
+  55% {
+    clip: rect(24px, 9999px, 71px, 0);
+  }
+  60% {
+    clip: rect(20px, 9999px, 54px, 0);
+  }
+  65% {
+    clip: rect(100px, 9999px, 67px, 0);
+  }
+  70% {
+    clip: rect(42px, 9999px, 99px, 0);
+  }
+  75% {
+    clip: rect(40px, 9999px, 99px, 0);
+  }
+  80% {
+    clip: rect(62px, 9999px, 38px, 0);
+  }
+  85% {
+    clip: rect(78px, 9999px, 38px, 0);
+  }
+  90% {
+    clip: rect(42px, 9999px, 41px, 0);
+  }
+  95% {
+    clip: rect(3px, 9999px, 46px, 0);
+  }
+  100% {
+    clip: rect(7px, 9999px, 30px, 0);
+  }
+}
+.glitch:after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 red;
+  top: 0;
+  color: inherit;
+  background: inherit;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim 2s infinite linear alternate-reverse;
+}
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(60px, 9999px, 91px, 0);
+  }
+  5% {
+    clip: rect(66px, 9999px, 77px, 0);
+  }
+  10% {
+    clip: rect(8px, 9999px, 14px, 0);
+  }
+  15% {
+    clip: rect(12px, 9999px, 37px, 0);
+  }
+  20% {
+    clip: rect(10px, 9999px, 62px, 0);
+  }
+  25% {
+    clip: rect(67px, 9999px, 62px, 0);
+  }
+  30% {
+    clip: rect(100px, 9999px, 47px, 0);
+  }
+  35% {
+    clip: rect(41px, 9999px, 61px, 0);
+  }
+  40% {
+    clip: rect(72px, 9999px, 23px, 0);
+  }
+  45% {
+    clip: rect(46px, 9999px, 55px, 0);
+  }
+  50% {
+    clip: rect(100px, 9999px, 54px, 0);
+  }
+  55% {
+    clip: rect(74px, 9999px, 84px, 0);
+  }
+  60% {
+    clip: rect(26px, 9999px, 67px, 0);
+  }
+  65% {
+    clip: rect(46px, 9999px, 56px, 0);
+  }
+  70% {
+    clip: rect(55px, 9999px, 98px, 0);
+  }
+  75% {
+    clip: rect(59px, 9999px, 57px, 0);
+  }
+  80% {
+    clip: rect(68px, 9999px, 84px, 0);
+  }
+  85% {
+    clip: rect(58px, 9999px, 26px, 0);
+  }
+  90% {
+    clip: rect(2px, 9999px, 95px, 0);
+  }
+  95% {
+    clip: rect(27px, 9999px, 85px, 0);
+  }
+  100% {
+    clip: rect(13px, 9999px, 11px, 0);
+  }
+}
+.glitch:before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 1px 0 blue;
+  top: 0;
+  color: inherit;
+  background: inherit;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+.form-control-magic {
+  position: relative;
+  margin: 20px auto;
+  max-width: 300px;
+  width: 100%;
+}
+
+.form-control-magic label {
+  position: absolute;
+  top: 0px;
+  left: 1rem;
+}
+
+.form-control-magic input {
+  border-bottom: 2px solid #fff;
+  font-size: 18px;
+  color: #fff;
+}
+
+.form-control-magic input:focus,
+.form-control-magic input:valid {
+  border-bottom-color: hsla(var(--p) / var(--tw-bg-opacity, 1));
+}
+
+.form-control-magic label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control-magic input:focus + label span,
+.form-control-magic input:valid + label span {
+  color: hsla(var(--p) / var(--tw-bg-opacity, 1));
+  transform: translate(-1rem, -40px);
 }
