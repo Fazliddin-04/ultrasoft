@@ -228,13 +228,11 @@ function EditListing() {
 
   return (
     <>
-      <header className="text-5xl sm:text-6xl font-extrabold text-center my-6">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Ro'yxatni o'zgartirish
-        </span>
-      </header>
+      <p className="text-2xl sm:text-4xl lg:text-5xl uppercase font-extrabold p-4 text-center">
+        <span className="text-accent">Ro'yxatni O'zgartirish</span>
+      </p>
 
-      <main className=" card bg-base-300 mx-auto p-5 w-11/12 sm:w-9/12 sm:p-10">
+      <main className="mx-auto border-4 rounded-xl border-base-300 p-5 w-11/12 sm:w-9/12 sm:p-10">
         <form onSubmit={onSubmit} className="form-control">
           <div className="btn-group mx-auto my-5 justify-center">
             <input
@@ -243,7 +241,7 @@ function EditListing() {
               value="software-apps"
               id="type"
               data-title="software apps"
-              className={`btn ${
+              className={`btn rounded-none ${
                 'software-apps' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
@@ -255,7 +253,7 @@ function EditListing() {
               value="mobile-apps"
               id="type"
               data-title="mobile apps"
-              className={`btn ${
+              className={`btn rounded-none ${
                 'mobile-apps' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
@@ -267,7 +265,7 @@ function EditListing() {
               value="software-games"
               id="type"
               data-title="software games"
-              className={`btn ${
+              className={`btn rounded-none ${
                 'software-games' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
@@ -279,7 +277,7 @@ function EditListing() {
               value="mobile-games"
               id="type"
               data-title="mobile games"
-              className={`btn ${
+              className={`btn rounded-none ${
                 'mobile-games' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
@@ -291,7 +289,7 @@ function EditListing() {
               value="windows-os"
               id="type"
               data-title="windows os"
-              className={`btn ${
+              className={`btn rounded-none ${
                 'windows-os' === formData.type ? 'btn-active' : ''
               }`}
               onClick={onMutate}
@@ -308,7 +306,7 @@ function EditListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category}
-                  className={`btn ${
+                  className={`btn rounded-none ${
                     category.toLowerCase() === formData.category
                       ? 'btn-active'
                       : ''
@@ -326,7 +324,7 @@ function EditListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category}
-                  className={`btn ${
+                  className={`btn rounded-none ${
                     category.toLowerCase() === formData.category
                       ? 'btn-active'
                       : ''
@@ -344,7 +342,7 @@ function EditListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category}
-                  className={`btn ${
+                  className={`btn rounded-none ${
                     category.toLowerCase() === formData.category
                       ? 'btn-active'
                       : ''
@@ -362,7 +360,7 @@ function EditListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category.replace('-', ' ')}
-                  className={`btn ${
+                  className={`btn rounded-none ${
                     category.toLowerCase() === formData.category
                       ? 'btn-active'
                       : ''
@@ -386,13 +384,13 @@ function EditListing() {
             id="name"
             value={name}
             onChange={onMutate}
-            className="input"
+            className="input input-bordered"
             placeholder="Ilova nomi"
             required
           />
 
-          <div className="grid grid-cols-3 grid-rows-2">
-            <div className="pr-10">
+          <div className="grid grid-cols-2 lg:grid-cols-3 sm:grid-rows-2 items-end gap-2">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">Versiya</span>
               </label>
@@ -402,12 +400,12 @@ function EditListing() {
                 value={version}
                 onChange={onMutate}
                 id="version"
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Ilova Versiyasi"
                 required
               />
             </div>
-            <div className="pr-10">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">Yosh Chegarasi</span>
               </label>
@@ -415,7 +413,7 @@ function EditListing() {
                 type="number"
                 name="ageLimit"
                 id="ageLimit"
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Yosh Chegarasi"
                 value={ageLimit}
                 onChange={onMutate}
@@ -434,12 +432,12 @@ function EditListing() {
                 id="os"
                 value={os}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Windows 7, Windows 10"
                 required
               />
             </div>
-            <div className="pr-10">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">
                   {os.includes('Windows')
@@ -459,7 +457,7 @@ function EditListing() {
                 id="cpu"
                 value={cpu}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder={
                   os.includes('Windows')
                     ? '32-bit, 64-bit, 86-bit'
@@ -474,7 +472,7 @@ function EditListing() {
                 required
               />
             </div>
-            <div className="pr-10">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">O'lcham</span>
               </label>
@@ -484,7 +482,7 @@ function EditListing() {
                 id="size"
                 value={size}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Umumiy o'lchamni MB yoki GB orqali ko'rsating"
                 required
               />
@@ -499,7 +497,7 @@ function EditListing() {
                 id="linkToDownload"
                 value={linkToDownload}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="https://. . ."
                 required
               />
@@ -514,7 +512,7 @@ function EditListing() {
             id="languages"
             value={languages}
             onChange={onMutate}
-            className="input w-full"
+            className="input input-bordered w-full"
             placeholder="Ilovada mavjud tillar"
             required
           />
@@ -522,7 +520,7 @@ function EditListing() {
             <span className="label-text">Umumiy sharh</span>
           </label>
           <textarea
-            className="textarea h-24"
+            className="textarea textarea-bordered h-24"
             value={overview}
             type="text"
             id="overview"
@@ -532,7 +530,7 @@ function EditListing() {
           ></textarea>
           <label className="label">Ikonka (ilova belgisi)</label>
           <input
-            className="formInputFile bg-base-100 rounded-xl p-2"
+            className="formInputFile bg-base-200 rounded-t-lg p-2"
             type="file"
             id="icon"
             onChange={onMutate}
@@ -540,7 +538,7 @@ function EditListing() {
             accept=".jpg,.png,.jpeg"
             required
           />
-          <div className="alert alert-info">
+          <div className="alert alert-info rounded-t-none">
             <div className="flex-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -563,7 +561,7 @@ function EditListing() {
           <label className="label">Suratlar</label>
 
           <input
-            className="formInputFile bg-base-100 rounded-xl p-2"
+            className="formInputFile bg-base-200 rounded-t-lg p-2"
             type="file"
             id="images"
             onChange={onMutate}
@@ -572,7 +570,7 @@ function EditListing() {
             multiple
             required
           />
-          <div className="alert alert-info">
+          <div className="alert alert-info rounded-t-none">
             <div className="flex-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
