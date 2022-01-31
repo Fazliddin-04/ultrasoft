@@ -19,11 +19,11 @@ function Sidebar() {
               <span>Kompyuter ilovalar</span>
             </li>
             <li>
-              <Link to="/software-apps">Hammasi</Link>
+              <Link to="/category/software-apps">Hammasi</Link>
             </li>
             {softwareCategory.map((category) => (
               <li key={softwareCategory.indexOf(category)}>
-                <Link to={`/software-apps/${category.toLowerCase()}`}>
+                <Link to={`/category/software-apps/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
@@ -42,11 +42,11 @@ function Sidebar() {
               <span>Kompyuter o'yinlar</span>
             </li>
             <li>
-              <Link to="/software-games">Hammasi</Link>
+              <Link to="/category/software-games">Hammasi</Link>
             </li>
             {gamesCategory.map((category) => (
               <li key={gamesCategory.indexOf(category)}>
-                <Link to={`/software-games/${category.toLowerCase()}`}>
+                <Link to={`/category/software-games/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
@@ -63,11 +63,11 @@ function Sidebar() {
               <span>Operatsion Sistemalar</span>
             </li>
             <li>
-              <Link to="/windows-os">Hammasi</Link>
+              <Link to="/category/windows-os">Hammasi</Link>
             </li>
             {windowsCategory.map((category) => (
               <li key={windowsCategory.indexOf(category)}>
-                <Link to={`/windows-os/${category.toLowerCase()}`}>
+                <Link to={`/category/windows-os/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
@@ -84,11 +84,11 @@ function Sidebar() {
               <span>Mobil ilovalar</span>
             </li>
             <li>
-              <Link to="/mobile-apps">Hammasi</Link>
+              <Link to="/category/mobile-apps">Hammasi</Link>
             </li>
             {mobileCategory.map((category) => (
               <li key={mobileCategory.indexOf(category)}>
-                <Link to={`/mobile-apps/${category.toLowerCase()}`}>
+                <Link to={`/category/mobile-apps/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
@@ -105,11 +105,11 @@ function Sidebar() {
               <span>Mobil o'yinlar</span>
             </li>
             <li>
-              <Link to="/mobile-games">Hammasi</Link>
+              <Link to="/category/mobile-games">Hammasi</Link>
             </li>
             {gamesCategory.map((category) => (
               <li key={gamesCategory.indexOf(category)}>
-                <Link to={`/mobile-games/${category.toLowerCase()}`}>
+                <Link to={`/category/mobile-games/${category.toLowerCase()}`}>
                   {category.replace(/-/g, ' ')}
                 </Link>
               </li>
