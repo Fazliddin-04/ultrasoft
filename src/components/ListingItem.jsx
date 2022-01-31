@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 function ListingItem({
   listing,
@@ -9,10 +10,23 @@ function ListingItem({
   bodyClasses,
   cardFigureClass,
 }) {
+  const [views, setViews] = useState(0)
+
+  useEffect(() => {
+    const updateVisitCount = async () => {
+      await fetch(`https://api.countapi.xyz/get/ultrasoft.uz/${id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          setViews(res.value)
+        })
+    }
+    updateVisitCount()
+  }, [id])
+
   return (
     <li className="indicator mx-auto">
       <Link
-        to={`/${listing.type}/${listing.category}/${id}`}
+        to={`/category/${listing.type}/${listing.category}/${id}`}
         className={`card card-bordered ${
           classes ? classes : ''
         } transition hover:shadow-xl`}
@@ -37,9 +51,13 @@ function ListingItem({
             )}
           </h2>
           {/* Vote Average */}
-          <div className="card-actions">
+          <div className="card-actions justify-between">
             <div className="badge badge-primary capitalize">
               {listing.category.replace(/-/g, ' ')}
+            </div>
+            <div className="badge badge-ghost gap-3">
+              <i className="far fa-eye"></i>
+              {views}
             </div>
           </div>
         </div>
