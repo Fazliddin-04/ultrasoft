@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import {
   collection,
   getDocs,
@@ -100,9 +100,37 @@ function SingleCategory() {
   }
 
   return (
-    <div className="m-10">
-      <header className="bg-base-300 p-4 rounded-xl">
-        <p className="text-3xl font-bold tracking-wide">
+    <div className='mb-5'>
+      <header className="bg-base-300 p-4 rounded-b-xl">
+        <div className="text-sm breadcrumbs px-5">
+          <ul className="flex flex-wrap">
+            <li>
+              <Link to="/">Bosh sahifa</Link>
+            </li>
+            <li>
+              <Link
+                to={`/category/${params.categoryType}`}
+                className="capitalize"
+              >
+                {params.categoryType === 'software-apps'
+                  ? 'Kompyuter ilovalar'
+                  : params.categoryType === 'software-games'
+                  ? "Kompyuter o'yinlar"
+                  : params.categoryType === 'mobile-apps'
+                  ? 'Mobil ilovalar'
+                  : params.categoryType === 'mobile-games'
+                  ? "Mobil o'yinlar"
+                  : params.categoryType.toUpperCase().replace('-', ' ')}
+              </Link>
+            </li>
+            <li>
+              <p className="capitalize">
+                {params.categoryName.replace(/-/g, ' ')}
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p className="text-3xl font-bold text-center">
           {params.categoryName.toUpperCase().replace(/-/g, ' ')}
         </p>
       </header>
@@ -129,12 +157,12 @@ function SingleCategory() {
           <br />
           <br />
           {lastFetchedListing && (
-            <p
-              className="mx-auto btn btn-outline"
+            <button
+              className="mx-auto btn btn-outline block"
               onClick={onFetchMoreListings}
             >
               Ko'proq yuklash
-            </p>
+            </button>
           )}
         </>
       ) : (
