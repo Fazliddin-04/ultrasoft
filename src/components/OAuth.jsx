@@ -35,20 +35,16 @@ function OAuth() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-5">
-      <p>
-        Google hisob orqali{' '}
-        {location.pathname === '/sign-up'
-          ? "ro'yxatdan o'ting"
-          : 'tizimga kiring'}
-      </p>
-      <button
-        className="btn btn-circle btn-active btn-lg p-3"
-        onClick={onGoogleClick}
-      >
-        <img src={googleIcon} alt="google" />
-      </button>
-    </div>
+    <button
+      className="btn btn-outline p-2 gap-2 text-sm lowercase w-full"
+      onClick={onGoogleClick}
+    >
+      <img src={googleIcon} alt="google" className="object-cover max-h-full mr-1" />
+      <span className='capitalize'>Google</span> orqali{' '}
+      {location.pathname === '/sign-up'
+        ? "ro'yxatdan o'ting"
+        : 'tizimga kiring'}
+    </button>
   )
 }
 
