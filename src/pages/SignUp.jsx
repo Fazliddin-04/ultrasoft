@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
   getAuth,
@@ -57,54 +57,93 @@ function SignUp() {
     }
   }
 
+  const ref1 = useRef()
+  const ref2 = useRef()
+  const ref3 = useRef()
+  useEffect(() => {
+    ref1.current.innerHTML = ref1.current.innerText
+      .split('')
+      .map(
+        (letter, idx) =>
+          `<span className="label-text" style="transition-delay: ${
+            idx * 50
+          }ms;">${letter}</span>`
+      )
+      .join('')
+  })
+  useEffect(() => {
+    ref2.current.innerHTML = ref2.current.innerText
+      .split('')
+      .map(
+        (letter, idx) =>
+          letter !== '' &&
+          `<span className="label-text" style="transition-delay: ${
+            idx * 50
+          }ms;">${letter}</span>`
+      )
+      .join('')
+  })
+  useEffect(() => {
+    ref3.current.innerHTML = ref3.current.innerText
+      .split('')
+      .map(
+        (letter, idx) =>
+          letter !== '' &&
+          `<span className="label-text" style="transition-delay: ${
+            idx * 50
+          }ms;">${letter}</span>`
+      )
+      .join('')
+  })
+
   return (
     <>
-      <header className="text-5xl sm:text-6xl font-extrabold text-center my-6">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Xush kelibsiz!
-        </span>
-      </header>
-      {/* artboard phone-5 horizontal */}
-      <div className="card bg-base-200 mx-auto p-5 w-11/12 sm:w-9/12 sm:p-10">
+      <div className="mx-auto bg-base-300 w-max max-w-full py-5 px-14 sm:my-10 sm:rounded">
+        <p className="text-3xl sm:text-4xl font-bold capitalize max-w-xs text-center my-5">
+          <span className="text-accent">Xush kelibsiz!</span>
+        </p>
+        <div className="flex justify-center mt-10 mb-5">
+          <OAuth />
+        </div>
         <form className="form-control" onSubmit={onSubmit}>
-          <label className="label mt-4">
-            <span className="label-text text-xl ">Ism</span>
-          </label>
-          <input
-            placeholder="Ism"
-            className="input input-primary input-bordered text-lg"
-            type="name"
-            id="name"
-            value={name}
-            onChange={onChange}
-            required
-          />
-          <label className="label mt-4">
-            <span className="label-text text-xl ">Email</span>
-          </label>
-          <input
-            placeholder="Email"
-            className="input input-primary input-bordered text-lg"
-            type="email"
-            id="email"
-            value={email}
-            onChange={onChange}
-            required
-          />
-          <label className="label mt-4">
-            <span className="label-text text-xl">Parol</span>
-          </label>
-          <div className="relative flex items-center justify-center">
+          <div className="form-control-magic">
             <input
-              placeholder="Parol"
-              className="input input-primary input-bordered text-lg flex-1"
+              className="input input-ghost w-full"
+              type="name"
+              id="name"
+              value={name}
+              onChange={onChange}
+              required
+            />
+            <label className="label block" ref={ref1}>
+              Ism
+            </label>
+          </div>
+          <div className="form-control-magic">
+            <input
+              className="input input-ghost w-full"
+              type="email"
+              id="email"
+              value={email}
+              onChange={onChange}
+              required
+            />
+            <label className="label block" ref={ref2}>
+              Email
+            </label>
+          </div>
+          <div className="form-control-magic flex items-center justify-center">
+            <input
+              className="input input-ghost w-full"
               type={showPassword ? 'text' : 'password'}
               id="password"
               value={password}
               onChange={onChange}
               required
             />
-
+            <label className="label block" ref={ref3}>
+              <span className="label-text text-xl">Parol</span>
+            </label>
             <button
               type="button"
               className="btn btn-outline btn-square btn-sm absolute right-2"
@@ -114,22 +153,17 @@ function SignUp() {
             </button>
           </div>
 
-          <button className="btn btn-block btn-primary mt-14">Ro'yxatdan o'tish</button>
+          <button className="btn btn-block btn-primary mt-5 gap-3">
+            Ro'yxatdan o'tish
+            <i className="far fa-arrow-right"></i>
+          </button>
         </form>
 
-        <div className="flex flex-col w-full mt-10">
-          <div className="grid h-25 pb-5 card rounded-box place-items-center">
-            <OAuth />
-          </div>
-          <div className="divider">YOKI</div>
-          <div className="grid h-20 card rounded-box place-items-center">
-            <Link
-              to="/sign-in"
-              className="text-center font-bold text-purple-400 my-10"
-            >
-              Tizimga kiring
-            </Link>
-          </div>
+        <div className="flex items-center justify-center flex-wrap gap-2 text-center mt-5">
+          <span>Hisob mavjudmi?</span>
+          <Link to="/sign-in" className="font-bold text-purple-400">
+            Tizimga kiring
+          </Link>
         </div>
       </div>
     </>
