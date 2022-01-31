@@ -1,8 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { useState } from 'react'
+import { getAuth } from 'firebase/auth'
 
 function DrawerSide({ title }) {
+  const [authSinc, setAuthSinc] = useState(null)
   const navigate = useNavigate()
+  const auth = getAuth()
+
+  setTimeout(() => {
+    console.log(auth.currentUser)
+    setAuthSinc(auth.currentUser)
+  }, 2000)
 
   function themeSelect() {
     ;(function (theme = localStorage.getItem('theme')) {
@@ -58,19 +67,24 @@ function DrawerSide({ title }) {
 
   themeChange()
   return (
-    <ul className="p-4 overflow-y-auto menu w-80 bg-neutral">
-      <div className="w-max p-2 mx-auto mb-2">
+    <ul className="p-4 overflow-y-auto menu w-80 bg-neutral text-neutral-content">
+      <div className="w-max p-2 mx-auto mb-4">
         <Link
           to="/"
-          className="text-2xl sm:text-3xl lg:text-4xl font-extrabold"
+          className="flex items-start text-4xl font-black uppercase"
         >
-          <span className="bg-clip-text uppercase text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
-            {title}
+          <span className="text-primary">
+            <div className="glitch" data-text={title}>
+              {title}
+            </div>
+          </span>
+          <span className="ml-1 rounded-md text-sm px-1 text-white h-max bg-primary">
+            .uz
           </span>
         </Link>
       </div>
       <li>
-        <Link to="/" className="btn btn-ghost rounded-none">
+        <Link to="/" className="btn btn-ghost mt-5">
           <div className="inline-block w-5 mr-2">
             <i className="far fa-home"></i>
           </div>
@@ -78,17 +92,9 @@ function DrawerSide({ title }) {
         </Link>
       </li>
       <li>
-        <Link to="/files" className="btn btn-ghost rounded-none">
-          <div className="inline-block w-5 mr-2">
-            <i className="far fa-folder"></i>
-          </div>
-          Fayllarim
-        </Link>
-      </li>
-      <li>
         <select
           data-choose-theme
-          className="appearance-none btn btn-ghost rounded-none"
+          className="appearance-none btn btn-ghost mt-5"
         >
           <option value="light">🌝 Yorqin</option>
           <option value="dark">🌚 Tun</option>
@@ -100,14 +106,36 @@ function DrawerSide({ title }) {
           <option value="wireframe">📝 Qo'lyozma</option>
         </select>
       </li>
-      <li>
-        <button
-          className="btn btn-primary"
-          onClick={() => navigate('/profile')}
-        >
-          Profil
-        </button>
-      </li>
+
+      {authSinc !== null ? (
+        <li>
+          <button
+            className="btn btn-primary mt-5"
+            onClick={() => navigate('/profile')}
+          >
+            Profil
+          </button>
+        </li>
+      ) : (
+        <>
+          <li>
+            <button
+              className="btn btn-ghost mt-5"
+              onClick={() => navigate('/sign-in')}
+            >
+              Tizimga kirish
+            </button>
+          </li>
+          <li>
+            <button
+              className="btn btn-primary mt-5"
+              onClick={() => navigate('/sign-up')}
+            >
+              Ro'yxatdan o'tish
+            </button>
+          </li>
+        </>
+      )}
     </ul>
   )
 }
