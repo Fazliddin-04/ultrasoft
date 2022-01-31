@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
   collection,
   getDocs,
@@ -13,6 +12,7 @@ import { toast } from 'react-toastify'
 import Slider from '../components/Slider'
 import Sidebar from '../components/layout/Sidebar'
 import ListingItem from '../components/ListingItem'
+import ListingItemXL from '../components/ListingItemXL'
 import Spinner from '../components/Spinner'
 
 function Explore() {
@@ -89,6 +89,7 @@ function Explore() {
       toast.error("Ro'yhatlarni olib kelib bo'lmadi")
     }
   }
+
   if (loading) {
     return <Spinner />
   }
@@ -96,7 +97,7 @@ function Explore() {
   return (
     <>
       <Slider />
-      <main className="flex items-stretch justify-around flex-wrap mt-10">
+      <div className="flex items-stretch justify-around flex-wrap mt-10">
         <div className="mb-14">
           <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4 text-center">
             <span className="text-accent">Kategoriyalar</span>
@@ -108,46 +109,7 @@ function Explore() {
             <span className="text-accent">Eng so'ngilari</span>
           </p>
           {listings.map(({ data, id }) => (
-            <div
-              className="card card-compact xl:card-side w-full card-bordered mb-5 shadow-xl"
-              key={id}
-            >
-              <figure className="explore-card-figure p-5 bg-gradient-to-br from-black via-base-100 to-transparent">
-                <img
-                  src={data.iconUrl[0]}
-                  alt={data.name}
-                  className="object-cover w-60 mx-auto"
-                />
-              </figure>
-              <div className="card-body justify-center">
-                <h2 className="card-title">
-                  {data.name}
-                  {new Date(data.timestamp.seconds * 1000).getDate() >=
-                    new Date().getDate() - 7 && (
-                    <div className="badge mx-2 uppercase">yangi</div>
-                  )}
-                </h2>
-                <p>
-                  {data.overview.length > 130
-                    ? data.overview.slice(0, 130) + '...'
-                    : data.overview}
-                </p>
-                <div className="card-actions">
-                  <a
-                    href={data.linkToDownload}
-                    className="btn btn-primary"
-                    target="_blank" rel="noreferrer"
-                  >
-                    Yuklab olish
-                  </a>
-                  <Link to={`/${data.type}/${data.category}/${id}`}>
-                    <button className="btn btn-outline">
-                      Ko'proq ma'lumot
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <ListingItemXL key={id} listing={data} id={id} />
           ))}
           <br />
           <br />
@@ -164,7 +126,7 @@ function Explore() {
           <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4 text-center">
             <span className="text-accent">Tavsiya etiladi</span>
           </p>
-          <div className="flex flex-wrap justify-center gap-10">
+          <div className="flex flex-wrap justify-center gap-10 my-10">
             {listings.map(
               ({ data, id }) =>
                 data.recommended && (
@@ -173,14 +135,14 @@ function Explore() {
                     id={id}
                     key={id}
                     classes="image-full w-60 sm:w-72"
-                    bodyClasses="justify-end bg-dark-30 items-center max-w-60"
+                    bodyClasses="justify-end bg-dark-30 items-center max-w-60 text-center"
                     cardFigureClass="h-60"
                   />
                 )
             )}
           </div>
         </div>
-      </main>
+      </div>
     </>
   )
 }
