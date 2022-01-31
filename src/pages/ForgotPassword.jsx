@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 import { toast } from 'react-toastify'
@@ -19,34 +19,47 @@ function ForgotPassword() {
     }
   }
 
+  const ref1 = useRef()
+
+  useEffect(() => {
+    ref1.current.innerHTML = ref1.current.innerText
+      .split('')
+      .map(
+        (letter, idx) =>
+          `<span className="label-text" style="transition-delay: ${
+            idx * 50
+          }ms;">${letter}</span>`
+      )
+      .join('')
+  })
+
   return (
     <>
-      <header className="text-5xl sm:text-6xl font-extrabold text-center my-6">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Parolni Tiklash
-        </span>
-      </header>
-      <div className=" card bg-base-200 mx-auto p-5 w-11/12 sm:w-9/12 sm:p-10">
+      <div className="mx-auto bg-base-300 w-max max-w-full py-10 px-14 sm:my-10 sm:rounded">
+        <p className="text-2xl sm:text-3xl font-bold capitalize max-w-xs text-center sm:my-5">
+          <span className="text-accent">Parolni Tiklash</span>
+        </p>
         <form className="form-control" onSubmit={onSubmit}>
-          <label className="label mt-4">
-            <span className="label-text text-xl ">Email</span>
-          </label>
-          <input
-            placeholder="Email"
-            className="input input-primary input-bordered text-lg"
-            type="email"
-            id="email"
-            value={email}
-            onChange={onChange}
-            required
-          />
-          <label className="label justify-end">
+          <div className="form-control-magic">
+            <input
+              className="input input-ghost w-full"
+              type="email"
+              id="email"
+              value={email}
+              onChange={onChange}
+              required
+            />
+            <label className="label block" ref={ref1}>
+              Email
+            </label>
+          </div>
+          <label className="label link link-hover justify-end">
             <Link to="/sign-in" className="label-text-alt text-lg">
               Tizimga kirish
             </Link>
           </label>
 
-          <button className="btn btn-block btn-primary mt-14">
+          <button className="btn btn-block btn-primary mt-5">
             Qayta tiklash xatini yuborish
           </button>
         </form>
