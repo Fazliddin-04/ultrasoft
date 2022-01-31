@@ -6,25 +6,27 @@ export const CategoryProvider = ({ children }) => {
   // eslint-disable-next-line
   const [softwareCategory, setSoftwareCategory] = useState([
     'Adobe',
+    'Aloqa',
     'Antivirus',
     'Brauzerlar',
-    'Aloqa',
-    'Ta\'lim',
     'Emulatorlar',
     'Grafik-tahrirchilar',
     'Media',
     'Matn-tahrirchilar',
+    'Ta\'lim',
+    'Utilitalar',
+    'Fayl Menejer'
   ])
 
   // eslint-disable-next-line
   const [mobileCategory, setMobileCategory] = useState([
-    'San\'at-&-Dizayn',
-    'Kitob-&-ma\'lumot',
     'Aloqa',
-    'Ta\'lim',
     'Grafik-tahrirchilar',
+    'Kitob-&-ma\'lumot',
     'Media',
     'Matn-tahrirchilar',
+    'San\'at-&-Dizayn',
+    'Ta\'lim',
   ])
 
   // eslint-disable-next-line
@@ -51,15 +53,38 @@ export const CategoryProvider = ({ children }) => {
     'Windows-11',
   ])
 
-
+  const [checkedSoftwareCategory, setCheckedSoftwareCategory] = useState(
+    new Set(['software-apps'])
+  )
+  const [checkedSoftwareGamesCategory, setCheckedSoftwareGamesCategory] =
+    useState(new Set(['software-games']))
+  const [checkedWindowsCategory, setCheckedWindowsCategory] = useState(
+    new Set(['windows-os'])
+  )
+  const [checkedMobileCategory, setCheckedMobileCategory] = useState(
+    new Set(['mobile-apps'])
+  )
+  const [checkedMobileGamesCategory, setCheckedMobileGamesCategory] = useState(
+    new Set(['mobile-games'])
+  )
 
   return (
     <CategoryContext.Provider
       value={{
-        gamesCategory,
+        gamesCategory, 
         mobileCategory,
         softwareCategory,
-        windowsCategory,
+        windowsCategory, 
+        checkedSoftwareCategory, 
+        checkedSoftwareGamesCategory, 
+        checkedWindowsCategory, 
+        checkedMobileCategory, 
+        checkedMobileGamesCategory, 
+        setCheckedSoftwareCategory, 
+        setCheckedSoftwareGamesCategory,
+        setCheckedWindowsCategory,
+        setCheckedMobileCategory,
+        setCheckedMobileGamesCategory
       }}
     >
       {children}
