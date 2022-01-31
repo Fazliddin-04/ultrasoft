@@ -39,6 +39,15 @@ function Listing() {
     fetchListing()
   }, [navigate, params.listingId])
 
+  useEffect(() => {
+    const updateVisitCount = async () => {
+      await fetch(
+        `https://api.countapi.xyz/hit/ultrasoft.uz/${params.listingId}`
+      ).then((res) => res.json())
+    }
+    updateVisitCount()
+  }, [params.listingId])
+
   const months = [
     'Yanvar',
     'Fevral',
@@ -87,7 +96,7 @@ function Listing() {
             <Link to="/">Bosh sahifa</Link>
           </li>
           <li>
-            <Link to={`/${listing.type}`} className="capitalize">
+            <Link to={`/category/${listing.type}`} className="capitalize">
               {listing.type === 'software-apps'
                 ? 'Kompyuter ilovalar'
                 : listing.type === 'software-games'
@@ -101,7 +110,7 @@ function Listing() {
           </li>
           <li>
             <Link
-              to={`/${listing.type}/${listing.category}`}
+              to={`/category/${listing.type}/${listing.category}`}
               className="capitalize"
             >
               {listing.category.replace('-', ' ')}
@@ -139,17 +148,18 @@ function Listing() {
             <span className="inline-block h-4 w-4 bg-accent mask mask-star-2"></span>
           </span>
         </div>
-        <div className="ml-auto flex items-start">
+        <div className="mx-auto sm:mx-0 sm:ml-auto flex items-start">
           <a
             href={listing.linkToDownload}
-            className="btn btn-wide btn-lg btn-animate"
-            target="_blank" rel="noreferrer"
+            className="btn-animate text-sm sm:text-xl lg:text-2xl rounded-3xl hover:text-accent-content"
+            target="_blank"
+            rel="noreferrer"
           >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
             Yuklab olish
+            <span className="first"></span>
+            <span className="second"></span>
+            <span className="third"></span>
+            <span className="fourth"></span>
           </a>
           <div className="dropdown dropdown-end ml-3">
             <div
