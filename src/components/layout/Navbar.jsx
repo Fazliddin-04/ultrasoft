@@ -1,8 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { getAuth } from 'firebase/auth'
 import PropTypes from 'prop-types'
+import {  useState } from 'react'
 
 function Navbar({ title }) {
+  const [authSinc, setAuthSinc] = useState(null)
   const navigate = useNavigate()
+  const auth = getAuth()
 
   function themeSelect() {
     ;(function (theme = localStorage.getItem('theme')) {
@@ -57,6 +61,11 @@ function Navbar({ title }) {
   }
 
   themeChange()
+  setTimeout(() => {
+    console.log(auth.currentUser)
+    setAuthSinc(auth.currentUser)
+    
+  }, 2000);
 
   return (
     <div className="w-full navbar bg-neutral text-neutral-content fixed top-0 left-0 z-50">
@@ -82,16 +91,20 @@ function Navbar({ title }) {
           to="/"
           className="flex items-start text-2xl sm:text-3xl lg:text-4xl font-extrabold uppercase"
         >
-          <span className="text-primary">{title}</span>
+          <span className="text-primary">
+            <div className="glitch" data-text={title}>
+              {title}
+            </div>
+          </span>
           <span className="ml-1 rounded-md text-sm px-1 text-white h-max bg-primary">
             .uz
           </span>
         </Link>
       </div>
       <div className="flex-none hidden lg:block">
-        <ul className="menu horizontal">
+        <ul className="menu horizontal gap-3">
           <li>
-            <Link to="/" className="btn btn-ghost rounded-none">
+            <Link to="/" className="btn btn-ghost">
               <div className="inline-block w-5 mr-2">
                 <i className="far fa-home"></i>
               </div>
@@ -99,18 +112,7 @@ function Navbar({ title }) {
             </Link>
           </li>
           <li>
-            <Link to="/files" className="btn btn-ghost rounded-none">
-              <div className="inline-block w-5 mr-2">
-                <i className="far fa-folder"></i>
-              </div>
-              Fayllarim
-            </Link>
-          </li>
-          <li>
-            <select
-              data-choose-theme
-              className="appearance-none btn btn-ghost rounded-none mr-5 px-1"
-            >
+            <select data-choose-theme className="btn btn-ghost pl-0">
               <option value="light">🌝 Yorqin</option>
               <option value="dark">🌚 Tun</option>
               <option value="cupcake">🧁 Cupcake</option>
@@ -121,14 +123,35 @@ function Navbar({ title }) {
               <option value="wireframe">📝 Qo'lyozma</option>
             </select>
           </li>
-          <li>
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate('/profile')}
-            >
-              Profil
-            </button>
-          </li>
+          {authSinc !== null ? (
+            <li>
+              <button
+                className="btn btn-primary"
+                onClick={() => navigate('/profile')}
+              >
+                Profil
+              </button>
+            </li>
+          ) : (
+            <>
+              <li>
+                <button
+                  className="btn btn-ghost"
+                  onClick={() => navigate('/sign-in')}
+                >
+                  Tizimga kirish
+                </button>
+              </li>
+              <li>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => navigate('/sign-up')}
+                >
+                  Ro'yxatdan o'tish
+                </button>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </div>
