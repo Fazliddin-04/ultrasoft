@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import Spinner from './Spinner'
@@ -20,12 +19,10 @@ function Slider() {
   const [loading, setLoading] = useState(true)
   const [listings, setListings] = useState(null)
 
-  const navigate = useNavigate()
-
   useEffect(() => {
     const fetchListings = async () => {
       const listingsRef = collection(db, 'listings')
-      const q = query(listingsRef, orderBy('timestamp', 'desc'), limit(5))
+      const q = query(listingsRef, orderBy('timestamp', 'desc'), limit(10))
       const querySnap = await getDocs(q)
 
       const listings = []
@@ -50,11 +47,9 @@ function Slider() {
 
   return (
     listings && (
-      <div className="bg-base-300 pb-8 rounded-b-xl">
-        <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4">
-          <span className="text-accent">
-            Ommabop materiallar
-          </span>
+      <div className="bg-base-300 rounded-b-xl">
+        <p className="text-2xl sm:text-3xl uppercase text-center sm:text-left font-extrabold p-4">
+          <span className="text-accent">Ommabop materiallar</span>
         </p>
 
         <Swiper
@@ -62,7 +57,12 @@ function Slider() {
           spaceBetween={30}
           navigation={true}
           pagination={{ clickable: true }}
-          className="w-full "
+          className="w-full"
+          style={{
+            '--swiper-navigation-color':
+              'hsla(var(--p) / var(--tw-bg-opacity, 1))',
+            '--swiper-pagination-color': '#fff',
+          }}
           autoplay={{
             delay: 5000,
             disableOnInteraction: false,
@@ -82,21 +82,17 @@ function Slider() {
               spaceBetween: 30,
             },
             1280: {
-              slidesPerView: 3,
+              slidesPerView: 4,
               spaceBetween: 30,
             },
           }}
         >
           {listings.map(({ data, id }) => (
-            <SwiperSlide
-              key={id}
-              onClick={() => navigate(`/category/${data.type}/${id}`)}
-              className="flex items-center justify-center"
-            >
+            <SwiperSlide key={id} className="flex items-center justify-center">
               <ListingItem
                 listing={data}
                 id={id}
-                classes="w-60 sm:w-72 h-full card-compact lg:card-normal"
+                classes="w-60 sm:w-72 h-full card-compact lg:card-normal mb-8"
                 bodyClasses="bg-base-200 h-48"
                 cardFigureClass="h-60 pt-2"
               />
