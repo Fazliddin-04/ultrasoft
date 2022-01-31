@@ -98,9 +98,9 @@ function Category() {
   }
 
   return (
-    <div className="m-10">
-      <header className="bg-base-300 p-4 rounded-xl">
-        <p className="text-3xl font-bold tracking-wide">
+    <div className='mb-5'>
+      <header className="bg-base-300 p-4 rounded-b-xl">
+        <p className="text-3xl sm:text-center font-bold tracking-wide">
           {params.categoryType === 'software-apps'
             ? 'Kompyuter ilovalar'
             : params.categoryType === 'software-games'
@@ -117,7 +117,7 @@ function Category() {
         <Spinner />
       ) : listings && listings.length > 0 ? (
         <>
-          <main className="my-10">
+          <div className="my-10">
             <ul className="p-0 grid gap-10 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 ">
               {listings.map((listing) => (
                 <ListingItem
@@ -130,17 +130,17 @@ function Category() {
                 />
               ))}
             </ul>
-          </main>
+          </div>
 
           <br />
           <br />
           {lastFetchedListing && (
-            <p
-              className="mx-auto btn btn-outline"
+            <button
+              className="mx-auto btn btn-outline block"
               onClick={onFetchMoreListings}
             >
               Ko'proq yuklash
-            </p>
+            </button>
           )}
         </>
       ) : (
