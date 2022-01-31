@@ -35,6 +35,7 @@ function CreateListing() {
     type: '',
     version: '',
     userRef: '',
+    views: 0,
   })
 
   const {
@@ -187,7 +188,9 @@ function CreateListing() {
     const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
     setLoading(false)
     toast.success("Ro'yxat saqlandi")
-    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+    navigate(
+      `/category/${formDataCopy.type}/${formDataCopy.category}/${docRef.id}`
+    )
   }
 
   if (loading) {
@@ -196,13 +199,11 @@ function CreateListing() {
 
   return (
     <>
-      <header className="text-5xl sm:text-6xl font-extrabold text-center my-6">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Ro'yxat Yaratish
-        </span>
-      </header>
+      <p className="text-2xl sm:text-4xl lg:text-5xl uppercase font-extrabold p-4 text-center">
+        <span className="text-accent">Ro'yxat Yaratish</span>
+      </p>
 
-      <main className=" card bg-base-300 mx-auto p-5 w-11/12 sm:w-9/12 sm:p-10">
+      <main className="mx-auto border-4 rounded-xl border-base-300 p-5 w-11/12 sm:w-9/12 sm:p-10">
         <form onSubmit={onSubmit} className="form-control">
           <div className="btn-group mx-auto my-5 justify-center">
             <input
@@ -211,7 +212,7 @@ function CreateListing() {
               value="software-apps"
               id="type"
               data-title="kompyuter ilova"
-              className="btn"
+              className="btn rounded-none"
               onClick={onMutate}
               required
             />
@@ -221,7 +222,7 @@ function CreateListing() {
               value="mobile-apps"
               id="type"
               data-title="mobil ilova"
-              className="btn"
+              className="btn rounded-none"
               onClick={onMutate}
               required
             />
@@ -231,7 +232,7 @@ function CreateListing() {
               value="software-games"
               id="type"
               data-title="kompyuter o'yin"
-              className="btn"
+              className="btn rounded-none"
               onClick={onMutate}
               required
             />
@@ -241,7 +242,7 @@ function CreateListing() {
               value="mobile-games"
               id="type"
               data-title="mobil o'yin"
-              className="btn"
+              className="btn rounded-none"
               onClick={onMutate}
               required
             />
@@ -251,7 +252,7 @@ function CreateListing() {
               value="windows-os"
               id="type"
               data-title="windows os"
-              className="btn"
+              className="btn rounded-none"
               onClick={onMutate}
               required
             />
@@ -266,7 +267,7 @@ function CreateListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category}
-                  className="btn"
+                  className="btn rounded-none"
                   key={gamesCategory.indexOf(category)}
                   onClick={onMutate}
                   required
@@ -280,7 +281,7 @@ function CreateListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category}
-                  className="btn"
+                  className="btn rounded-none"
                   key={softwareCategory.indexOf(category)}
                   onClick={onMutate}
                   required
@@ -294,7 +295,7 @@ function CreateListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category}
-                  className="btn"
+                  className="btn rounded-none"
                   key={mobileCategory.indexOf(category)}
                   onClick={onMutate}
                   required
@@ -308,7 +309,7 @@ function CreateListing() {
                   value={category.toLowerCase()}
                   id="category"
                   data-title={category.replace('-', ' ')}
-                  className="btn"
+                  className="btn rounded-none"
                   key={windowsCategory.indexOf(category)}
                   onClick={onMutate}
                   required
@@ -328,13 +329,13 @@ function CreateListing() {
             id="name"
             value={name}
             onChange={onMutate}
-            className="input"
+            className="input input-bordered"
             placeholder="Ilova nomi"
             required
           />
 
-          <div className="grid grid-cols-3 grid-rows-2">
-            <div className="pr-10">
+          <div className="grid grid-cols-2 lg:grid-cols-3 sm:grid-rows-2 items-end gap-2">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">Versiya</span>
               </label>
@@ -344,12 +345,12 @@ function CreateListing() {
                 value={version}
                 onChange={onMutate}
                 id="version"
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Ilova Versiyasi"
                 required
               />
             </div>
-            <div className="pr-10">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">Yosh Chegarasi</span>
               </label>
@@ -357,7 +358,7 @@ function CreateListing() {
                 type="number"
                 name="ageLimit"
                 id="ageLimit"
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Yosh Chegarasi"
                 value={ageLimit}
                 onChange={onMutate}
@@ -376,12 +377,12 @@ function CreateListing() {
                 id="os"
                 value={os}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Windows 7, Windows 10"
                 required
               />
             </div>
-            <div className="pr-10">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">
                   {os.includes('Windows')
@@ -401,7 +402,7 @@ function CreateListing() {
                 id="cpu"
                 value={cpu}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder={
                   os.includes('Windows')
                     ? '32-bit, 64-bit, 86-bit'
@@ -416,7 +417,7 @@ function CreateListing() {
                 required
               />
             </div>
-            <div className="pr-10">
+            <div className="lg:pr-10">
               <label className="label">
                 <span className="label-text">O'lcham</span>
               </label>
@@ -426,7 +427,7 @@ function CreateListing() {
                 id="size"
                 value={size}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="Umumiy o'lchamni MB yoki GB orqali ko'rsating"
                 required
               />
@@ -441,7 +442,7 @@ function CreateListing() {
                 id="linkToDownload"
                 value={linkToDownload}
                 onChange={onMutate}
-                className="input w-full"
+                className="input input-bordered w-full"
                 placeholder="https://. . ."
                 required
               />
@@ -456,7 +457,7 @@ function CreateListing() {
             id="languages"
             value={languages}
             onChange={onMutate}
-            className="input w-full"
+            className="input input-bordered w-full"
             placeholder="Ilovada mavjud tillar"
             required
           />
@@ -464,7 +465,7 @@ function CreateListing() {
             <span className="label-text">Umumiy sharh</span>
           </label>
           <textarea
-            className="textarea h-24"
+            className="textarea textarea-bordered h-24"
             value={overview}
             type="text"
             id="overview"
@@ -474,7 +475,7 @@ function CreateListing() {
           ></textarea>
           <label className="label">Ikonka (ilova belgisi)</label>
           <input
-            className="formInputFile bg-base-100 rounded-xl p-2"
+            className="formInputFile bg-base-200 rounded-t-lg p-2"
             type="file"
             id="icon"
             onChange={onMutate}
@@ -482,7 +483,7 @@ function CreateListing() {
             accept=".jpg,.png,.jpeg"
             required
           />
-          <div className="alert alert-info">
+          <div className="alert alert-info rounded-t-none">
             <div className="flex-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -505,7 +506,7 @@ function CreateListing() {
           <label className="label">Suratlar</label>
 
           <input
-            className="formInputFile bg-base-100 rounded-xl p-2"
+            className="formInputFile bg-base-200 rounded-t-lg p-2"
             type="file"
             id="images"
             onChange={onMutate}
@@ -514,7 +515,7 @@ function CreateListing() {
             multiple
             required
           />
-          <div className="alert alert-info">
+          <div className="alert alert-info rounded-t-none">
             <div className="flex-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
