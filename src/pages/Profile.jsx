@@ -17,6 +17,7 @@ import ListingItem from '../components/ListingItem'
 
 function Profile() {
   const auth = getAuth()
+  const [menuPersonal, setMenuPersonal] = useState(true)
   const [menuListings, setMenuListings] = useState(false)
   const [changeDetails, setChangeDetails] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -101,63 +102,79 @@ function Profile() {
   }
 
   return (
-    <div>
-      <div className="text-6xl bg-base-300 p-8 font-bold my-3 flex flex-wrap items-center justify-between gap-5 rounded-xl">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 text-shadow-lg">
-          Salom {name.split(' ')[0]}!
+    <div className="">
+      <div className="text-3xl sm:text-4xl lg:text-6xl bg-base-300 text-base-content rounded-br-xl p-8 font-bold flex flex-wrap items-center justify-between gap-5 uppercase">
+        <span>
+          Salom
+          <div className="glitch" data-text={`${name.split(' ')[0]}`}>
+            {name.split(' ')[0]}!
+          </div>
         </span>
-
-        <button className="btn btn-secondary" type="button" onClick={onLogout}>
+        <button
+          className="btn btn-secondary gap-3 text-xl"
+          type="button"
+          onClick={onLogout}
+        >
           Chiqish
+          <i className="far fa-sign-out-alt"></i>
         </button>
       </div>
 
-      <div className="bg-base-300 rounded-xl p-8 mb-90">
-        <div className="p-1 rounded-xl flex  items-start justify-between w-full h-full flex-col xl:flex-row">
-          <div className="p-4 bg-base-200 rounded-xl flex-1 w-full">
+      <div>
+        <div className="rounded-xl flex  items-start justify-between w-full h-full flex-col xl:flex-row">
+          <div className="flex-1 w-full">
             <ul
-              className="menu py-3 shadow-lg bg-base-100 rounded-box w-full"
+              className="menu py-3 shadow-lg bg-base-300 rounded-b-xl w-full"
               id="main-menu"
             >
               <li
-                className={!menuListings ? 'bordered' : ''}
+                className={menuPersonal ? 'bordered' : ''}
                 onClick={() => {
+                  setMenuPersonal(true)
                   setMenuListings(false)
                 }}
               >
                 <span>Shaxsiy ma'lumotlar</span>
               </li>
               {auth.currentUser.uid === 'Hcmq9D3NnRbp2NrDTF499tNCU2H2' ? (
-                <li
-                  className={menuListings ? 'bordered' : ''}
-                  onClick={() => {
-                    setMenuListings(true)
-                  }}
-                >
-                  <span>Ro'yxatlar</span>
-                </li>
+                <>
+                  <li
+                    className={menuListings ? 'bordered' : ''}
+                    onClick={() => {
+                      setMenuListings(true)
+                      // setMenuCategories(false)
+                      setMenuPersonal(false)
+                    }}
+                  >
+                    <span>Ro'yxatlar</span>
+                  </li>
+                </>
               ) : auth.currentUser.uid === 'jU9RlhVGJqVfqHi0GSlURRFGdKC2' ? (
-                <li
-                  className={menuListings ? 'bordered' : ''}
-                  onClick={() => {
-                    setMenuListings(true)
-                  }}
-                >
-                  <span>Ro'yxatlar</span>
-                </li>
+                <>
+                  <li
+                    className={menuListings ? 'bordered' : ''}
+                    onClick={() => {
+                      setMenuListings(true)
+                      setMenuPersonal(false)
+                      // setMenuCategories(false)
+                    }}
+                  >
+                    <span>Ro'yxatlar</span>
+                  </li>
+                </>
               ) : (
                 <></>
               )}
             </ul>
           </div>
-          <div className="p-4 bg-base-200 flex-1 rounded-xl h-full w-full xl:ml-2">
-            <ul className="p-4 shadow-lg bg-base-100 rounded-box h-full">
-              {!menuListings ? (
+          <div className="flex-1  my-5 w-full xl:ml-5">
+            <ul className="p-4 shadow-lg bg-base-300 rounded-xl rounded-tl-none">
+              {menuPersonal && (
                 <>
                   <div className="flex items-center justify-between flex-wrap gap-5">
                     <p className="text-xl">Shaxsiy ma'lumotlar</p>
                     <button
-                      className="btn btn-active"
+                      className="btn btn-outline"
                       onClick={() => {
                         changeDetails && onSubmit()
                         setChangeDetails((prevState) => !prevState)
@@ -194,8 +211,9 @@ function Profile() {
                     />
                   </form>
                 </>
-              ) : (
-                <div className="max-h-90 overflow-y-auto h-full">
+              )}
+              {menuListings && (
+                <div className="max-h-90 overflow-y-auto">
                   <div className="w-full h-12">
                     <Link
                       to="/create-listing"
