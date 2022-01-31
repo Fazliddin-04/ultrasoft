@@ -16,6 +16,7 @@ import PrivateRoute from './components/PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import EditListing from './pages/EditListing';
 import Listing from './pages/Listing';
+import NotFound from './pages/NotFound';
 import { CategoryProvider } from './context/CategoryContext';
 
 
@@ -25,15 +26,16 @@ function App() {
       <Router>
         <div className="drawer">
           <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-          <div className="flex flex-col drawer-content">
+          <div className="flex flex-col justify-between min-h-screen drawer-content">
             <Navbar />
 
-            <main className='container mx-auto py-16'>
+            <main className='container flex-1 mx-auto mt-16'>
               <Routes>
                 <Route path='/' element={<Explore />} />
-                <Route path='/:categoryType' element={<Category />} />
-                <Route path='/:categoryType/:categoryName' element={<SingleCategory />} />
-                <Route path='/:categoryType/:categoryName/:listingId' element={<Listing />} />
+                <Route path='/*' element={<NotFound />} />
+                <Route path='/category/:categoryType' element={<Category />} />
+                <Route path='/category/:categoryType/:categoryName' element={<SingleCategory />} />
+                <Route path='/category/:categoryType/:categoryName/:listingId' element={<Listing />} />
                 <Route path='/profile' element={<PrivateRoute />}>
                   <Route path='/profile' element={<Profile />} />
                 </Route>
