@@ -9,7 +9,6 @@ function DrawerSide({ title }) {
   const auth = getAuth()
 
   setTimeout(() => {
-    console.log(auth.currentUser)
     setAuthSinc(auth.currentUser)
   }, 2000)
 
