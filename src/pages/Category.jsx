@@ -99,7 +99,7 @@ function Category() {
 
   return (
     <div className='mb-5'>
-      <header className="bg-base-300 p-4 rounded-b-xl">
+      <div className="bg-base-300 p-4 rounded-b-xl">
         <p className="text-3xl sm:text-center font-bold tracking-wide">
           {params.categoryType === 'software-apps'
             ? 'Kompyuter ilovalar'
@@ -111,21 +111,21 @@ function Category() {
             ? "Mobil o'yinlar"
             : params.categoryType.toUpperCase().replace('-', ' ')}
         </p>
-      </header>
+      </div>
 
       {loading ? (
         <Spinner />
       ) : listings && listings.length > 0 ? (
         <>
           <div className="my-10">
-            <ul className="p-0 grid gap-10 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 ">
+            <ul className="p-0 flex flex-wrap gap-10">
               {listings.map((listing) => (
                 <ListingItem
                   listing={listing.data}
                   id={listing.id}
                   key={listing.id}
                   classes="w-60 md:w-72 card-compact lg:card-normal"
-                  bodyClasses="bg-base-200 h-48"
+                  bodyClasses="bg-base-200"
                   cardFigureClass="h-60 pt-2"
                 />
               ))}
