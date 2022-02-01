@@ -198,12 +198,19 @@ function Listing() {
           </div>
         </div>
       </div>
-      <div className="bg-base-200 rounded-t-xl py-5 mt-10 listing-slide-container">
+      <div className="w-4/5 py-5 mt-10 mx-auto">
+      <div className="divider"></div>
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-medium mb-5">
+          Umumiy sharh
+        </h2>
+        <p className="md:text-xl">{listing.overview}</p>
+      </div>
+      <div className="flex flex-wrap items-center justify-around gap-10 my-10 p-5 listing-slide-container rounded-xl bg-base-200">
         <Swiper
           slidesPerView={1}
           navigation={true}
           pagination={{ clickable: true }}
-          className="w-5/6"
+          className="w-max lg:w-1/2"
           loop={true}
           style={{
             '--swiper-navigation-color':
@@ -219,52 +226,64 @@ function Listing() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
-      <div className="flex justify-around gap-10 my-10 px-5">
-        <div className="w-2/3">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-medium mb-5">
-            Umumiy sharh
-          </h2>
-          <p className="md:text-xl">{listing.overview}</p>
-        </div>
-        <div className="w-max">
+        <div className="w-max lg:w-1/3">
           <h2 className="text-xl md:text-2xl lg:text-3xl font-medium mb-5">
             Qo'shimcha ma'lumotlar
           </h2>
-          <p className="md:text-xl font-medium">Versiya</p>
-          <p className="md:text-xl mb-5">
-            {listing.version.replace(/[`~!@#$%^&*()_|+=?;:'",\][<>{}]/gi, ' ')}
-          </p>
-          <p className="md:text-xl font-medium">O'lchami</p>
-          <p className="md:text-xl mb-5">
-            {listing.size
-              .replace(/[`~!@#$%^&*()_|+=?;:'",<>{}]/gi, ' ')
-              .toUpperCase()}
-          </p>
-          <p className="md:text-xl font-medium">Yangilandi</p>
-          <p className="md:text-xl mb-5">
-            {day} {months[month]} {year}
-          </p>
-          <p className="md:text-xl font-medium">Operatsion Sistema</p>
-          <p className="md:text-xl mb-5">{listing.os}</p>
-          <p className="md:text-xl font-medium">
-            {listing.os.includes('Windows')
-              ? 'CPU'
-              : listing.os.includes('MacOS')
-              ? 'CPU'
-              : listing.os.includes('iOS')
-              ? "iOS'ning talab qilingan versiyasi"
-              : listing.os.includes('Android')
-              ? "iOS'ning talab qilingan versiyasi"
-              : "OS'ning talab qilingan versiyasi"}
-          </p>
-          <p className="md:text-xl mb-5">
-            {listing.cpu.replace(/[`~!@#$%^&*()_|+=?;:'",.<>{}]/gi, ' ')}
-          </p>
-          <p className="md:text-xl font-medium">Tillar</p>
-          <p className="md:text-xl mb-5 capitalize">
-            {listing.languages.replace(/[`~!@#$%^&*()_|+=?;:'"/<>{}]/gi, ', ')}
-          </p>
+          <div className="flex flex-wrap gap-y-10 gap-x-10">
+            <div>
+              <p className="md:text-xl font-medium">Versiya</p>
+              <p className="md:text-xl mb-5">
+                {listing.version.replace(
+                  /[`~!@#$%^&*()_|+=?;:'",\][<>{}]/gi,
+                  ' '
+                )}
+              </p>
+            </div>
+            <div>
+              <p className="md:text-xl font-medium">O'lchami</p>
+              <p className="md:text-xl mb-5">
+                {listing.size
+                  .replace(/[`~!@#$%^&*()_|+=?;:'",<>{}]/gi, ' ')
+                  .toUpperCase()}
+              </p>
+            </div>
+            <div>
+              <p className="md:text-xl font-medium">Yangilandi</p>
+              <p className="md:text-xl mb-5">
+                {day} {months[month]} {year}
+              </p>
+            </div>
+            <div>
+              <p className="md:text-xl font-medium">Operatsion Sistema</p>
+              <p className="md:text-xl mb-5">{listing.os}</p>
+            </div>
+            <div>
+              <p className="md:text-xl font-medium">
+                {listing.os.includes('Windows')
+                  ? 'CPU'
+                  : listing.os.includes('MacOS')
+                  ? 'CPU'
+                  : listing.os.includes('iOS')
+                  ? "iOS'ning talab qilingan versiyasi"
+                  : listing.os.includes('Android')
+                  ? "iOS'ning talab qilingan versiyasi"
+                  : "OS'ning talab qilingan versiyasi"}
+              </p>
+              <p className="md:text-xl mb-5">
+                {listing.cpu.replace(/[`~!@#$%^&*()_|+=?;:'",.<>{}]/gi, ' ')}
+              </p>
+            </div>
+            <div>
+              <p className="md:text-xl font-medium">Tillar</p>
+              <p className="md:text-xl mb-5 capitalize">
+                {listing.languages.replace(
+                  /[`~!@#$%^&*()_|+=?;:'"/<>{}]/gi,
+                  ', '
+                )}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </>
