@@ -14,6 +14,13 @@ function ListingItemXL({ listing, id }) {
     }
     updateVisitCount()
   }, [id])
+
+  const kFormatter = (num) => {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
+      : Math.sign(num) * Math.abs(num)
+  }
+
   return (
     <div
       className="card card-compact xl:card-side w-full card-bordered mb-5 shadow-xl"
@@ -29,8 +36,9 @@ function ListingItemXL({ listing, id }) {
       <div className="card-body justify-center">
         <h2 className="card-title">
           {listing.name}
-          {new Date(listing.timestamp.seconds * 1000).getDate() >=
-            new Date().getDate() - 7 && (
+          {new Date(listing.timestamp.seconds * 1000).toLocaleDateString(
+            'en'
+          ) === new Date().toLocaleDateString('en') && (
             <div className="badge mx-2 uppercase">yangi</div>
           )}
         </h2>
@@ -53,7 +61,7 @@ function ListingItemXL({ listing, id }) {
           </Link>
           <div className="badge badge-ghost self-end ml-auto gap-3">
             <i className="far fa-eye"></i>
-            {views}
+            {kFormatter(views)}
           </div>
         </div>
       </div>
