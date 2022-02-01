@@ -62,9 +62,7 @@ function Navbar({ title }) {
 
   themeChange()
   setTimeout(() => {
-    console.log(auth.currentUser)
-    setAuthSinc(auth.currentUser)
-    
+    setAuthSinc(auth.currentUser)    
   }, 2000);
 
   return (
