@@ -23,6 +23,12 @@ function ListingItem({
     updateVisitCount()
   }, [id])
 
+  const kFormatter = (num) => {
+    return Math.abs(num) > 999
+      ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'k'
+      : Math.sign(num) * Math.abs(num)
+  }
+
   return (
     <li className="indicator mx-auto">
       <Link
@@ -45,8 +51,8 @@ function ListingItem({
             {listing.name.length > 30
               ? listing.name.slice(0, 30) + '...'
               : listing.name}
-            {new Date(listing.timestamp.seconds * 1000).getDate() ===
-              new Date().getDate() && (
+            {new Date(listing.timestamp.seconds * 1000).toLocaleDateString('en') ===
+              new Date().toLocaleDateString('en') && (
               <div className="badge mx-2 badge-secondary uppercase">yangi</div>
             )}
           </h2>
@@ -57,7 +63,7 @@ function ListingItem({
             </div>
             <div className="badge badge-ghost gap-3">
               <i className="far fa-eye"></i>
-              {views}
+              {kFormatter(views)}
             </div>
           </div>
         </div>
