@@ -392,7 +392,7 @@ function CreateListing() {
                     : os.includes('iOS')
                     ? "iOS'ning talab qilingan versiyasi"
                     : os.includes('Android')
-                    ? "iOS'ning talab qilingan versiyasi"
+                    ? "Android'ning talab qilingan versiyasi"
                     : "OS'ning talab qilingan versiyasi"}
                 </span>
               </label>
