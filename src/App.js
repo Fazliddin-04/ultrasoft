@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 
 import Explore from './pages/Explore'
+import About from './pages/About';
 import Navbar from './components/layout/Navbar';
 import DrawerSide from './components/layout/DrawerSide';
 import Footer from './components/layout/Footer';
@@ -32,6 +33,7 @@ function App() {
             <main className='container flex-1 mx-auto mt-16'>
               <Routes>
                 <Route path='/' element={<Explore />} />
+                <Route path='/about' element={<About />} />
                 <Route path='/*' element={<NotFound />} />
                 <Route path='/category/:categoryType' element={<Category />} />
                 <Route path='/category/:categoryType/:categoryName' element={<SingleCategory />} />
