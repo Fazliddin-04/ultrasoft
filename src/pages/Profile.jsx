@@ -142,7 +142,6 @@ function Profile() {
                     className={menuListings ? 'bordered' : ''}
                     onClick={() => {
                       setMenuListings(true)
-                      // setMenuCategories(false)
                       setMenuPersonal(false)
                     }}
                   >
@@ -156,7 +155,6 @@ function Profile() {
                     onClick={() => {
                       setMenuListings(true)
                       setMenuPersonal(false)
-                      // setMenuCategories(false)
                     }}
                   >
                     <span>Ro'yxatlar</span>
