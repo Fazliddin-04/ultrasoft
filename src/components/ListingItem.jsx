@@ -47,17 +47,18 @@ function ListingItem({
           <img src={listing.iconUrl[0]} alt={listing.name} />
         </figure>
         <div className={`card-body ${bodyClasses}`}>
-          <h2 className="card-title">
+          <h2 className="card-title flex-1 ">
             {listing.name.length > 30
               ? listing.name.slice(0, 30) + '...'
               : listing.name}
-            {new Date(listing.timestamp.seconds * 1000).toLocaleDateString('en') ===
-              new Date().toLocaleDateString('en') && (
+            {new Date(listing.timestamp.seconds * 1000).toLocaleDateString(
+              'en'
+            ) === new Date().toLocaleDateString('en') && (
               <div className="badge mx-2 badge-secondary uppercase">yangi</div>
             )}
           </h2>
           {/* Vote Average */}
-          <div className="card-actions justify-between">
+          <div className="card-actions flex-1 items-center justify-between">
             <div className="badge badge-primary capitalize">
               {listing.category.replace(/-/g, ' ')}
             </div>
