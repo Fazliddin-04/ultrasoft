@@ -6,7 +6,14 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  doc,
+  updateDoc,
+  arrayUnion,
+} from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
@@ -15,10 +22,17 @@ import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
 function CreateListing() {
-  const { gamesCategory, mobileCategory, softwareCategory, windowsCategory } =
-    useContext(CategoryContext)
+  const {
+    cTypes,
+    loadingCon,
+    softwareGamesCategory,
+    softwareCategory,
+    windowsCategory,
+  } = useContext(CategoryContext)
 
   const [loading, setLoading] = useState(false)
+  const [addCategory, setAddCategory] = useState(false)
+  const [showAddCategory, setShowAddCategory] = useState(false)
   const [formData, setFormData] = useState({
     ageLimit: 0,
     category: '',
@@ -57,6 +71,7 @@ function CreateListing() {
   const auth = getAuth()
   const navigate = useNavigate()
   const isMounted = useRef(true)
+  const newCategory = useRef()
 
   useEffect(() => {
     if (isMounted) {
@@ -99,6 +114,10 @@ function CreateListing() {
         [e.target.id]: boolean ?? e.target.value,
       }))
     }
+
+    if (e.target.id === 'type') {
+      setShowAddCategory(true)
+    }
   }
 
   const onSubmit = async (e) => {
@@ -122,7 +141,7 @@ function CreateListing() {
     const storeImage = async (image) => {
       return new Promise((resolve, reject) => {
         const storage = getStorage()
-        const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
+        const fileName = `${image.name}-${uuidv4()}`
 
         const storageRef = ref(storage, 'images/' + fileName)
 
@@ -193,7 +212,23 @@ function CreateListing() {
     )
   }
 
-  if (loading) {
+  const HandleCategory = async () => {
+    if (newCategory.current.value.trim() !== '') {
+      const docRef = doc(db, 'categories', type)
+      await updateDoc(docRef, {
+        categoryTypes: arrayUnion(
+          newCategory.current.value.replace(/\s+/g, '-').toLowerCase()
+        ),
+      })
+      toast.success('Kategoriya saqlandi')
+      setShowAddCategory(false)
+      window.location.reload()
+    } else {
+      toast.error("Kategoriya bo'sh, saqlanmadi")
+    }
+  }
+
+  if (loading || loadingCon) {
     return <Spinner />
   }
 
@@ -203,106 +238,33 @@ function CreateListing() {
         <span className="text-accent">Ro'yxat Yaratish</span>
       </p>
 
-      <main className="mx-auto border-4 rounded-xl border-base-300 p-5 w-11/12 sm:w-9/12 sm:p-10">
+      <div className="mx-auto border-4 rounded-xl border-base-300 p-5 w-11/12 sm:w-9/12 sm:p-10">
         <form onSubmit={onSubmit} className="form-control">
           <div className="btn-group mx-auto my-5 justify-center">
-            <input
-              type="radio"
-              name="type"
-              value="software-apps"
-              id="type"
-              data-title="kompyuter ilova"
-              className="btn rounded-none"
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="mobile-apps"
-              id="type"
-              data-title="mobil ilova"
-              className="btn rounded-none"
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="software-games"
-              id="type"
-              data-title="kompyuter o'yin"
-              className="btn rounded-none"
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="mobile-games"
-              id="type"
-              data-title="mobil o'yin"
-              className="btn rounded-none"
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="windows-os"
-              id="type"
-              data-title="windows os"
-              className="btn rounded-none"
-              onClick={onMutate}
-              required
-            />
+            {cTypes.map((categoryType) => (
+              <input
+                type="radio"
+                name="type"
+                value={categoryType.toLowerCase()}
+                id="type"
+                data-title={
+                  categoryType.toLowerCase() === 'software-apps'
+                    ? 'Kompyuter ilovalar'
+                    : categoryType.toLowerCase() === 'software-games'
+                    ? "Kompyuter o'yinlar"
+                    : categoryType.toUpperCase().replace('-', ' ')
+                }
+                className="btn rounded-none"
+                onClick={onMutate}
+                key={cTypes.indexOf(categoryType)}
+                required
+              />
+            ))}
           </div>
 
           <div className="btn-group mx-auto my-5 justify-center">
-            {type === 'software-games' || type === 'mobile-games' ? (
-              gamesCategory.map((category) => (
-                <input
-                  type="radio"
-                  name="category"
-                  value={category.toLowerCase()}
-                  id="category"
-                  data-title={category}
-                  className="btn rounded-none"
-                  key={gamesCategory.indexOf(category)}
-                  onClick={onMutate}
-                  required
-                />
-              ))
-            ) : type === 'software-apps' ? (
-              softwareCategory.map((category) => (
-                <input
-                  type="radio"
-                  name="category"
-                  value={category.toLowerCase()}
-                  id="category"
-                  data-title={category}
-                  className="btn rounded-none"
-                  key={softwareCategory.indexOf(category)}
-                  onClick={onMutate}
-                  required
-                />
-              ))
-            ) : type === 'mobile-apps' ? (
-              mobileCategory.map((category) => (
-                <input
-                  type="radio"
-                  name="category"
-                  value={category.toLowerCase()}
-                  id="category"
-                  data-title={category}
-                  className="btn rounded-none"
-                  key={mobileCategory.indexOf(category)}
-                  onClick={onMutate}
-                  required
-                />
-              ))
-            ) : type === 'windows-os' ? (
-              windowsCategory.map((category) => (
+            {type === 'software-games' ? (
+              softwareGamesCategory.map((category, index) => (
                 <input
                   type="radio"
                   name="category"
@@ -310,13 +272,70 @@ function CreateListing() {
                   id="category"
                   data-title={category.replace('-', ' ')}
                   className="btn rounded-none"
-                  key={windowsCategory.indexOf(category)}
+                  key={softwareGamesCategory.indexOf(index)}
+                  onClick={onMutate}
+                  required
+                />
+              ))
+            ) : type === 'software-apps' ? (
+              softwareCategory.map((category, index) => (
+                <input
+                  type="radio"
+                  name="category"
+                  value={category.toLowerCase()}
+                  id="category"
+                  data-title={category.replace('-', ' ')}
+                  className="btn rounded-none"
+                  key={softwareCategory.indexOf(index)}
+                  onClick={onMutate}
+                  required
+                />
+              ))
+            ) : type === 'windows-os' ? (
+              windowsCategory.map((category, index) => (
+                <input
+                  type="radio"
+                  name="category"
+                  value={category.toLowerCase()}
+                  id="category"
+                  data-title={category.replace('-', ' ')}
+                  className="btn rounded-none"
+                  key={windowsCategory.indexOf(index)}
                   onClick={onMutate}
                   required
                 />
               ))
             ) : (
               <></>
+            )}
+            {addCategory ? (
+              <>
+                <input
+                  type="text"
+                  id="category"
+                  className="input input-bordered rounded-none"
+                  onChange={onMutate}
+                  ref={newCategory}
+                />
+                <button type="button" className="btn" onClick={HandleCategory}>
+                  qo'shish
+                </button>
+                <button
+                  className="btn btn-ghost"
+                  onClick={() => setAddCategory(false)}
+                >
+                  yopish
+                </button>
+              </>
+            ) : (
+              showAddCategory && (
+                <button
+                  className="btn rounded-none text-2xl"
+                  onClick={() => setAddCategory(true)}
+                >
+                  +
+                </button>
+              )
             )}
           </div>
 
@@ -562,11 +581,20 @@ function CreateListing() {
               </button>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary mt-10">
-            Yaratish
-          </button>
+          <div className="mt-10 flex items-center gap-5">
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => navigate('/profile')}
+            >
+              ortga
+            </button>
+            <button type="submit" className="btn btn-primary flex-auto">
+              Yaratish
+            </button>
+          </div>
         </form>
-      </main>
+      </div>
     </>
   )
 }
