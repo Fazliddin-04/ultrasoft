@@ -1,90 +1,72 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+} from 'firebase/firestore'
+import { db } from '../firebase.config'
 
 const CategoryContext = createContext()
 
 export const CategoryProvider = ({ children }) => {
-  // eslint-disable-next-line
-  const [softwareCategory, setSoftwareCategory] = useState([
-    'Adobe',
-    'Aloqa',
-    'Antivirus',
-    'Brauzerlar',
-    'Emulatorlar',
-    'Grafik-tahrirchilar',
-    'Media',
-    'Matn-tahrirchilar',
-    'Ta\'lim',
-    'Utilitalar',
-    'Fayl Menejer'
-  ])
+  const [softwareCategory, setSoftwareCategory] = useState(null)
 
-  // eslint-disable-next-line
-  const [mobileCategory, setMobileCategory] = useState([
-    'Aloqa',
-    'Grafik-tahrirchilar',
-    'Kitob-&-ma\'lumot',
-    'Media',
-    'Matn-tahrirchilar',
-    'San\'at-&-Dizayn',
-    'Ta\'lim',
-  ])
+  const [softwareGamesCategory, setSoftwareGamesCategory] = useState(null)
 
-  // eslint-disable-next-line
-  const [gamesCategory, setGamesCategory] = useState([
-    'Action',
-    'Sarguzasht',
-    'Arkada',
-    'Taxta',
-    'Karta',
-    'Tasodifiy',
-    'Ta\'limiy',
-    'Boshqotirma',
-    'Poyga',
-    'Simulyator',
-    'Strategiya',
-    'Sport',
-  ])
+  const [windowsCategory, setWindowsCategory] = useState(null)
 
-  // eslint-disable-next-line
-  const [windowsCategory, setWindowsCategory] = useState([
-    'Windows-7',
-    'Windows-8',
-    'Windows-10',
-    'Windows-11',
-  ])
+  const [loadingCon, setLoadingCon] = useState(true)
 
-  const [checkedSoftwareCategory, setCheckedSoftwareCategory] = useState(
-    new Set(['software-apps'])
-  )
-  const [checkedSoftwareGamesCategory, setCheckedSoftwareGamesCategory] =
-    useState(new Set(['software-games']))
-  const [checkedWindowsCategory, setCheckedWindowsCategory] = useState(
-    new Set(['windows-os'])
-  )
-  const [checkedMobileCategory, setCheckedMobileCategory] = useState(
-    new Set(['mobile-apps'])
-  )
-  const [checkedMobileGamesCategory, setCheckedMobileGamesCategory] = useState(
-    new Set(['mobile-games'])
-  )
+  const [cTypes, setCTypes] = useState([])
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        // Get referense
+        const categoriesRef = collection(db, 'categories')
+
+        // create a query
+        const q = query(categoriesRef, orderBy('timestamp', 'desc'))
+
+        // Execute query
+        const querySnap = await getDocs(q)
+
+
+        querySnap.forEach((doc) => {
+          setCTypes((prevState) => ([
+            ...prevState,
+            doc.id,
+          ]))
+          if (doc.id === 'software-games') {
+            return setSoftwareGamesCategory(doc.data().categoryTypes)
+          }
+          if (doc.id === 'software-apps') {
+            return setSoftwareCategory(doc.data().categoryTypes)
+          }
+          if (doc.id === 'windows-os') {
+            return setWindowsCategory(doc.data().categoryTypes)
+          }
+        })
+
+        setLoadingCon(false)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchCategories()
+
+  }, [])
 
   return (
     <CategoryContext.Provider
       value={{
-        gamesCategory, 
-        mobileCategory,
+        cTypes,
+        loadingCon,
+        softwareGamesCategory,
         softwareCategory,
-        windowsCategory, 
-        checkedSoftwareCategory, 
-        checkedSoftwareGamesCategory, 
-        checkedWindowsCategory, 
-        checkedMobileCategory, 
-        checkedMobileGamesCategory, 
-        setCheckedSoftwareCategory, 
-        setCheckedSoftwareGamesCategory,
-        setCheckedWindowsCategory,
-        setCheckedMobileCategory,
-        setCheckedMobileGamesCategory
+        windowsCategory,
       }}
     >
       {children}
