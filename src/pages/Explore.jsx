@@ -126,7 +126,7 @@ function Explore() {
           <p className="text-2xl sm:text-3xl uppercase font-extrabold p-4 text-center">
             <span className="text-accent">Tavsiya etiladi</span>
           </p>
-          <div className="flex flex-wrap justify-center gap-10 my-10">
+          <div className="flex flex-wrap justify-center gap-10 mb-10">
             {listings.map(
               ({ data, id }) =>
                 data.recommended && (
@@ -135,7 +135,7 @@ function Explore() {
                     id={id}
                     key={id}
                     classes="image-full w-60 sm:w-72"
-                    bodyClasses="justify-end bg-dark-30 items-center max-w-60 text-center"
+                    bodyClasses="justify-end bg-dark-30 items-center max-w-60 text-center pt-20"
                     cardFigureClass="h-60"
                   />
                 )
