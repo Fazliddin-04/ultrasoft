@@ -68,10 +68,7 @@ function DrawerSide({ title }) {
   return (
     <ul className="p-4 overflow-y-auto menu w-80 bg-neutral text-neutral-content">
       <div className="w-max p-2 mx-auto mb-4">
-        <Link
-          to="/"
-          className="flex items-start text-4xl font-black uppercase"
-        >
+        <Link to="/" className="flex items-start text-4xl font-black uppercase">
           <span className="text-primary">
             <div className="glitch" data-text={title}>
               {title}
@@ -88,6 +85,14 @@ function DrawerSide({ title }) {
             <i className="far fa-home"></i>
           </div>
           Bosh sahifa
+        </Link>
+      </li>
+      <li>
+        <Link to="/about" className="btn btn-ghost mt-5">
+          <div className="inline-block w-5 mr-2">
+            <i className="far fa-book"></i>
+          </div>
+          sayt haqida
         </Link>
       </li>
       <li>
