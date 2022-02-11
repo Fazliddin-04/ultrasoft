@@ -149,10 +149,6 @@ function Category() {
             ? 'Kompyuter ilovalar'
             : params.categoryType === 'software-games'
             ? "Kompyuter o'yinlar"
-            : params.categoryType === 'mobile-apps'
-            ? 'Mobil ilovalar'
-            : params.categoryType === 'mobile-games'
-            ? "Mobil o'yinlar"
             : params.categoryType.toUpperCase().replace('-', ' ')}{' '}
           uchun ro'yxatlar yo'q
         </p>
