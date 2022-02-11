@@ -1,11 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 import PropTypes from 'prop-types'
-import {  useState } from 'react'
+import { useState } from 'react'
 
 function Navbar({ title }) {
-  const [authSinc, setAuthSinc] = useState(null)
-  const navigate = useNavigate()
+  // eslint-disable-next-line no-unused-vars
+  const [authSync, setAuthSync] = useState(null)
+  // const navigate = useNavigate()
   const auth = getAuth()
 
   function themeSelect() {
@@ -62,12 +63,12 @@ function Navbar({ title }) {
 
   themeChange()
   setTimeout(() => {
-    setAuthSinc(auth.currentUser)    
-  }, 2000);
+    setAuthSync(auth.currentUser)
+  }, 2000)
 
   return (
     <div className="w-full navbar bg-neutral text-neutral-content fixed top-0 left-0 z-50">
-      <div className="flex-none lg:hidden">
+      <div className="flex-none">
         <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +100,18 @@ function Navbar({ title }) {
           </span>
         </Link>
       </div>
-      <div className="flex-none hidden lg:block">
+      <p className="mx-2 flex-1 flex items-center justify-end">
+        <a
+          href="https://t.me/UltraSoft_uz"
+          target="_blank"
+          rel="noreferrer"
+          className="btn btn-ghost gap-x-3"
+        >
+          <i className="fab fa-telegram fa-2x"></i>
+          <span className="hidden sm:inline">obuna bo'ling</span>
+        </a>
+      </p>
+      {/* <div className="flex-none hidden lg:block">
         <ul className="menu horizontal gap-3">
           <li>
             <Link to="/" className="btn btn-ghost">
@@ -107,6 +119,14 @@ function Navbar({ title }) {
                 <i className="far fa-home"></i>
               </div>
               Bosh sahifa
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" className="btn btn-ghost">
+              <div className="inline-block w-5 mr-2">
+                <i className="far fa-book"></i>
+              </div>
+              sayt haqida
             </Link>
           </li>
           <li>
@@ -151,7 +171,7 @@ function Navbar({ title }) {
             </>
           )}
         </ul>
-      </div>
+      </div> */}
     </div>
   )
 }
