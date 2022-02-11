@@ -6,7 +6,13 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage'
-import { doc, updateDoc, getDoc, serverTimestamp } from 'firebase/firestore'
+import {
+  doc,
+  updateDoc,
+  getDoc,
+  serverTimestamp,
+  arrayUnion,
+} from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { useNavigate, useParams } from 'react-router-dom'
 import Spinner from '../components/Spinner'
@@ -15,10 +21,16 @@ import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
 function EditListing() {
-  const { gamesCategory, mobileCategory, softwareCategory, windowsCategory } =
-    useContext(CategoryContext)
+  const {
+    cTypes,
+    loadingCon,
+    softwareGamesCategory,
+    softwareCategory,
+    windowsCategory,
+  } = useContext(CategoryContext)
 
   const [loading, setLoading] = useState(false)
+  const [addCategory, setAddCategory] = useState(false)
   const [listing, setListing] = useState(null)
   const [formData, setFormData] = useState({
     ageLimit: 0,
@@ -58,6 +70,7 @@ function EditListing() {
   const navigate = useNavigate()
   const params = useParams()
   const isMounted = useRef(true)
+  const newCategory = useRef()
 
   // Fetch listing to edit
   useEffect(() => {
@@ -219,10 +232,27 @@ function EditListing() {
     await updateDoc(docRef, formDataCopy)
     setLoading(false)
     toast.success("Ro'yxat saqlandi")
-    navigate(`/category/${formDataCopy.type}/${docRef.id}`)
+    navigate(
+      `/category/${formDataCopy.type}/${formDataCopy.category}/${docRef.id}`
+    )
   }
 
-  if (loading) {
+  const HandleCategory = async () => {
+    if (newCategory.current.value.trim() !== '') {
+      const docRef = doc(db, 'categories', type)
+      await updateDoc(docRef, {
+        categoryTypes: arrayUnion(
+          newCategory.current.value.replace(/\s+/g, '-').toLowerCase()
+        ),
+      })
+      toast.success('Kategoriya saqlandi')
+      window.location.reload()
+    } else {
+      toast.error("Kategoriya bo'sh, saqlanmadi")
+    }
+  }
+
+  if (loading || loadingCon) {
     return <Spinner />
   }
 
@@ -232,86 +262,45 @@ function EditListing() {
         <span className="text-accent">Ro'yxatni O'zgartirish</span>
       </p>
 
-      <main className="mx-auto border-4 rounded-xl border-base-300 p-5 w-11/12 sm:w-9/12 sm:p-10">
+      <div className="mx-auto border-4 rounded-xl border-base-300 p-5 w-11/12 sm:w-9/12 sm:p-10">
         <form onSubmit={onSubmit} className="form-control">
           <div className="btn-group mx-auto my-5 justify-center">
-            <input
-              type="radio"
-              name="type"
-              value="software-apps"
-              id="type"
-              data-title="software apps"
-              className={`btn rounded-none ${
-                'software-apps' === formData.type ? 'btn-active' : ''
-              }`}
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="mobile-apps"
-              id="type"
-              data-title="mobile apps"
-              className={`btn rounded-none ${
-                'mobile-apps' === formData.type ? 'btn-active' : ''
-              }`}
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="software-games"
-              id="type"
-              data-title="software games"
-              className={`btn rounded-none ${
-                'software-games' === formData.type ? 'btn-active' : ''
-              }`}
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="mobile-games"
-              id="type"
-              data-title="mobile games"
-              className={`btn rounded-none ${
-                'mobile-games' === formData.type ? 'btn-active' : ''
-              }`}
-              onClick={onMutate}
-              required
-            />
-            <input
-              type="radio"
-              name="type"
-              value="windows-os"
-              id="type"
-              data-title="windows os"
-              className={`btn rounded-none ${
-                'windows-os' === formData.type ? 'btn-active' : ''
-              }`}
-              onClick={onMutate}
-              required
-            />
+            {cTypes.map((categoryType) => (
+              <input
+                type="radio"
+                name="type"
+                value={categoryType.toLowerCase()}
+                id="type"
+                data-title={
+                  categoryType.toLowerCase() === 'software-apps'
+                    ? 'Kompyuter ilovalar'
+                    : categoryType.toLowerCase() === 'software-games'
+                    ? "Kompyuter o'yinlar"
+                    : categoryType.toUpperCase().replace('-', ' ')
+                }
+                className={`btn rounded-none ${
+                  listing.type === categoryType && 'btn-outline'
+                }`}
+                onClick={onMutate}
+                key={cTypes.indexOf(categoryType)}
+                required
+              />
+            ))}
           </div>
 
           <div className="btn-group mx-auto my-5 justify-center">
-            {type === 'software-games' || type === 'mobile-games' ? (
-              gamesCategory.map((category) => (
+            {type === 'software-games' ? (
+              softwareGamesCategory.map((category) => (
                 <input
                   type="radio"
                   name="category"
                   value={category.toLowerCase()}
                   id="category"
-                  data-title={category}
+                  data-title={category.replace('-', ' ')}
                   className={`btn rounded-none ${
-                    category.toLowerCase() === formData.category
-                      ? 'btn-active'
-                      : ''
+                    listing.category === category && 'btn-outline'
                   }`}
-                  key={gamesCategory.indexOf(category)}
+                  key={softwareGamesCategory.indexOf(category)}
                   onClick={onMutate}
                   required
                 />
@@ -323,31 +312,11 @@ function EditListing() {
                   name="category"
                   value={category.toLowerCase()}
                   id="category"
-                  data-title={category}
+                  data-title={category.replace('-', ' ')}
                   className={`btn rounded-none ${
-                    category.toLowerCase() === formData.category
-                      ? 'btn-active'
-                      : ''
+                    listing.category === category && 'btn-outline'
                   }`}
                   key={softwareCategory.indexOf(category)}
-                  onClick={onMutate}
-                  required
-                />
-              ))
-            ) : type === 'mobile-apps' ? (
-              mobileCategory.map((category) => (
-                <input
-                  type="radio"
-                  name="category"
-                  value={category.toLowerCase()}
-                  id="category"
-                  data-title={category}
-                  className={`btn rounded-none ${
-                    category.toLowerCase() === formData.category
-                      ? 'btn-active'
-                      : ''
-                  }`}
-                  key={mobileCategory.indexOf(category)}
                   onClick={onMutate}
                   required
                 />
@@ -361,9 +330,7 @@ function EditListing() {
                   id="category"
                   data-title={category.replace('-', ' ')}
                   className={`btn rounded-none ${
-                    category.toLowerCase() === formData.category
-                      ? 'btn-active'
-                      : ''
+                    listing.category === category && 'btn-outline'
                   }`}
                   key={windowsCategory.indexOf(category)}
                   onClick={onMutate}
@@ -372,6 +339,33 @@ function EditListing() {
               ))
             ) : (
               <></>
+            )}
+            {addCategory ? (
+              <>
+                <input
+                  type="text"
+                  id="category"
+                  className="input input-bordered rounded-none"
+                  onChange={onMutate}
+                  ref={newCategory}
+                />
+                <button type="" className="btn" onClick={HandleCategory}>
+                  qo'shish
+                </button>
+                <button
+                  className="btn btn-ghost"
+                  onClick={() => setAddCategory(false)}
+                >
+                  yopish
+                </button>
+              </>
+            ) : (
+              <button
+                className="btn rounded-none text-2xl"
+                onClick={() => setAddCategory(true)}
+              >
+                +
+              </button>
             )}
           </div>
 
@@ -447,7 +441,7 @@ function EditListing() {
                     : os.includes('iOS')
                     ? "iOS'ning talab qilingan versiyasi"
                     : os.includes('Android')
-                    ? "iOS'ning talab qilingan versiyasi"
+                    ? "Android'ning talab qilingan versiyasi"
                     : "OS'ning talab qilingan versiyasi"}
                 </span>
               </label>
@@ -617,11 +611,20 @@ function EditListing() {
               </button>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary mt-10">
-            O'zgartirish
-          </button>
+          <div className="mt-10 flex items-center gap-5">
+            <button
+              type="button"
+              className="btn btn-outline"
+              onClick={() => navigate('/profile')}
+            >
+              ortga
+            </button>
+            <button type="submit" className="btn btn-primary flex-auto">
+              o'zgartirish
+            </button>
+          </div>
         </form>
-      </main>
+      </div>
     </>
   )
 }
