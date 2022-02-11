@@ -6,7 +6,6 @@ import { useState } from 'react'
 function Navbar({ title }) {
   // eslint-disable-next-line no-unused-vars
   const [authSync, setAuthSync] = useState(null)
-  // const navigate = useNavigate()
   const auth = getAuth()
 
   function themeSelect() {
@@ -111,67 +110,6 @@ function Navbar({ title }) {
           <span className="hidden sm:inline">obuna bo'ling</span>
         </a>
       </p>
-      {/* <div className="flex-none hidden lg:block">
-        <ul className="menu horizontal gap-3">
-          <li>
-            <Link to="/" className="btn btn-ghost">
-              <div className="inline-block w-5 mr-2">
-                <i className="far fa-home"></i>
-              </div>
-              Bosh sahifa
-            </Link>
-          </li>
-          <li>
-            <Link to="/about" className="btn btn-ghost">
-              <div className="inline-block w-5 mr-2">
-                <i className="far fa-book"></i>
-              </div>
-              sayt haqida
-            </Link>
-          </li>
-          <li>
-            <select data-choose-theme className="btn btn-ghost pl-0">
-              <option value="light">🌝 Yorqin</option>
-              <option value="dark">🌚 Tun</option>
-              <option value="cupcake">🧁 Cupcake</option>
-              <option value="halloween">🎃 Halloween</option>
-              <option value="bumblebee">🐝 Bumblebee</option>
-              <option value="synthwave">🌃 Synthwave</option>
-              <option value="cyberpunk">🤖 Cyberpunk</option>
-              <option value="wireframe">📝 Qo'lyozma</option>
-            </select>
-          </li>
-          {authSinc !== null ? (
-            <li>
-              <button
-                className="btn btn-primary"
-                onClick={() => navigate('/profile')}
-              >
-                Profil
-              </button>
-            </li>
-          ) : (
-            <>
-              <li>
-                <button
-                  className="btn btn-ghost"
-                  onClick={() => navigate('/sign-in')}
-                >
-                  Tizimga kirish
-                </button>
-              </li>
-              <li>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => navigate('/sign-up')}
-                >
-                  Ro'yxatdan o'tish
-                </button>
-              </li>
-            </>
-          )}
-        </ul>
-      </div> */}
     </div>
   )
 }
