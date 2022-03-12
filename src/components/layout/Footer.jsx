@@ -25,6 +25,7 @@ function Footer() {
           alt="MyCounter - счётчик и статистика"
           width="88"
           height="41"
+          style={{transform: 'rotateX(180deg)'}}
         />
       </a>
       <div className="md:place-self-center md:justify-self-end">
