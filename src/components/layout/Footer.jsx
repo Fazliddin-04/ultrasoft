@@ -1,6 +1,5 @@
 function Footer() {
   const fullYear = new Date().getFullYear()
-
   return (
     <footer className="px-10 py-4 border-t footer bg-neutral text-neutral-content border-base-300">
       <div className="items-center grid-flow-col">
@@ -19,6 +18,16 @@ function Footer() {
           Mualliflik huquqi &copy; {fullYear} - Barcha huquqlar himoyalangan
         </p>
       </div>
+      <a target="_blank" href="https://mycounter.ua/" rel="noreferrer noopener">
+        <img
+          src="https://get.mycounter.ua/counter.php?id=172570"
+          title="MyCounter - счётчик и статистика"
+          alt="MyCounter - счётчик и статистика"
+          width="88"
+          height="41"
+          style={{ transform: 'rotateX(180deg)' }}
+        />
+      </a>
       <div className="md:place-self-center md:justify-self-end">
         <div className="grid grid-flow-col gap-4 text-3xl">
           <a href="https://t.me/UltraSoft_uz" target="_blank" rel="noreferrer">
